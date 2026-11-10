@@ -229,39 +229,59 @@ h1, h2, h3, h4, p { margin: 0; }
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
   background: #fff; border: 1px solid var(--line);
   border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden;
 }
 .kpi-strip.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.kpi { position: relative; padding: 18px 12px 16px; text-align: center; min-width: 0; }
+.kpi {
+  position: relative; padding: 16px 14px 14px; min-height: 148px;
+  text-align: center; min-width: 0;
+  display: flex; flex-direction: column;
+}
 .kpi + .kpi::before, .kpi + .kpi-stacked::before, .kpi-stacked + .kpi::before {
-  content: ""; position: absolute; left: 0; top: 22%; height: 56%;
+  content: ""; position: absolute; left: 0; top: 20%; height: 60%;
   width: 1px; background: #EEF2F7;
 }
+.kpi-label {
+  font-size: 11px; color: #66748A; line-height: 1.4; letter-spacing: .2px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+}
 .kpi-value {
-  font-family: var(--num-font); font-size: 27px; font-weight: 500;
-  color: var(--blue); line-height: 1.15; letter-spacing: .3px;
-  white-space: nowrap;
+  font-family: var(--num-font); font-size: 36px; font-weight: 500;
+  color: var(--blue); line-height: 1; letter-spacing: .4px;
+  white-space: nowrap; flex: 1; display: flex; align-items: center; justify-content: center;
+  margin: 6px 0 4px;
 }
 .kpi-value .unit {
-  font-family: var(--font); font-size: 10.5px; font-weight: 400;
+  font-family: var(--font); font-size: 11px; font-weight: 400;
   color: var(--text-3); margin-left: 3px; letter-spacing: 0;
 }
-.kpi-label { margin-top: 6px; font-size: 12px; color: #66748A; }
-.kpi-note { margin-top: 3px; font-size: 10.5px; color: var(--text-3); }
+.kpi-note {
+  font-size: 10.5px; color: var(--text-3);
+  padding: 0 2px; line-height: 1.5;
+}
 .kpi-note .down { color: #1FA97C; }
+.kpi-note .up { color: #D84343; }
 .kpi-note .muted { color: #A2ADBC; }
+
+/* 底部类型 tag：填补底部视觉空白 */
+.kpi-type {
+  margin-top: 8px; font-size: 10px; color: var(--text-3);
+  background: #F4F7FB; border-radius: 10px;
+  padding: 2px 8px; align-self: center; letter-spacing: .3px;
+}
 
 /* 碳排水平徽标 */
 .kpi-value-level {
-  display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
 }
 .level-circle {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 46px; height: 46px; border-radius: 50%;
-  font-size: 18px; font-weight: 500; color: #fff;
+  width: 54px; height: 54px; border-radius: 50%;
+  font-size: 20px; font-weight: 500; color: #fff;
   background: radial-gradient(circle at 30% 30%, #6DD4A9 0%, #2FAF7E 100%);
-  box-shadow: 0 4px 10px rgba(47,175,126,.18);
+  box-shadow: 0 5px 12px rgba(47,175,126,.22);
 }
-.kpi-value-level.high .level-circle { background: radial-gradient(circle at 30% 30%, #FFB89A 0%, #E86A3C 100%); box-shadow: 0 4px 10px rgba(232,106,60,.18); }
+.kpi-value-level.high .level-circle { background: radial-gradient(circle at 30% 30%, #FFB89A 0%, #E86A3C 100%); box-shadow: 0 5px 12px rgba(232,106,60,.22); }
 .level-badge {
   font-size: 10px; color: #66748A; background: #F0F4FA;
   border-radius: 3px; padding: 1px 6px; letter-spacing: .5px;
@@ -269,17 +289,18 @@ h1, h2, h3, h4, p { margin: 0; }
 
 /* 纵向堆叠 KPI（总用能碳排量 + 绿能减碳量） */
 .kpi-stacked {
-  position: relative; min-width: 0; padding: 16px 10px 14px;
-  display: flex; flex-direction: column; gap: 4px; text-align: center;
+  position: relative; min-width: 0; padding: 12px 10px 10px;
+  display: flex; flex-direction: column; min-height: 148px;
 }
 .kpi-stacked-row {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 3px 6px; border-radius: 4px;
+  display: flex; flex-direction: column; align-items: center; flex: 1;
+  padding: 4px 6px; border-radius: 4px; justify-content: center;
 }
-.kpi-stacked-row + .kpi-stacked-row { border-top: 1px dashed #EDF0F5; padding-top: 7px; }
+.kpi-stacked-row + .kpi-stacked-row { border-top: 1px dashed #EDF0F5; }
 .kpi-stacked-row .value {
-  font-family: var(--num-font); font-size: 20px; font-weight: 500;
+  font-family: var(--num-font); font-size: 26px; font-weight: 500;
   color: #344054; white-space: nowrap; letter-spacing: .2px;
+  line-height: 1.05;
 }
 .kpi-stacked-row .value .unit {
   font-family: var(--font); font-size: 10px; color: var(--text-3);
@@ -287,7 +308,7 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .kpi-stacked-row .value.green { color: #1FA97C; }
 .kpi-stacked-row .label {
-  font-size: 11px; color: #66748A; margin-top: 3px;
+  font-size: 11px; color: #66748A; margin-top: 4px;
 }
 .kpi-stacked-row .note {
   font-size: 10px; color: var(--text-3); margin-top: 2px;
