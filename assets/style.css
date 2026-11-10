@@ -242,8 +242,12 @@ h1, h2, h3, h4, p { margin: 0; }
   width: 1px; background: #EEF2F7;
 }
 .kpi-label {
-  font-size: 11px; color: #66748A; line-height: 1.4; letter-spacing: .2px;
+  font-size: 13px; font-weight: 600; color: #344054;
+  line-height: 1.4; letter-spacing: .2px;
   display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+}
+.kpi-stacked-row .label {
+  font-size: 12px; font-weight: 600; color: #475467; margin-top: 4px;
 }
 .kpi-value {
   font-family: var(--num-font); font-size: 36px; font-weight: 500;
@@ -307,9 +311,6 @@ h1, h2, h3, h4, p { margin: 0; }
   margin-left: 2px; font-weight: 400;
 }
 .kpi-stacked-row .value.green { color: #1FA97C; }
-.kpi-stacked-row .label {
-  font-size: 11px; color: #66748A; margin-top: 4px;
-}
 .kpi-stacked-row .note {
   font-size: 10px; color: var(--text-3); margin-top: 2px;
 }
