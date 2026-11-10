@@ -226,10 +226,11 @@ h1, h2, h3, h4, p { margin: 0; }
 
 /* ---------- KPI ---------- */
 .kpi-strip {
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   background: #fff; border: 1px solid var(--line);
   border-radius: var(--radius); box-shadow: var(--shadow);
 }
+.kpi-strip.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .kpi { position: relative; padding: 15px 10px 14px; text-align: center; min-width: 0; }
 .kpi + .kpi::before {
   content: ""; position: absolute; left: 0; top: 22%; height: 56%;
@@ -248,6 +249,46 @@ h1, h2, h3, h4, p { margin: 0; }
 .kpi-note { margin-top: 3px; font-size: 10.5px; color: var(--text-3); }
 .kpi-note .down { color: #1FA97C; }
 .kpi-note .muted { color: #A2ADBC; }
+
+/* 纵向堆叠 KPI（总用能碳排量 + 绿能减碳量） */
+.kpi-stacked {
+  position: relative; min-width: 0; padding: 12px 10px 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kpi-stacked::before {
+  content: ""; position: absolute; left: 0; top: 18%; height: 64%;
+  width: 1px; background: #EEF2F7;
+}
+.kpi-stacked::after {
+  content: ""; position: absolute; right: 0; top: 18%; height: 64%;
+  width: 1px; background: #EEF2F7;
+}
+.kpi-stacked-row {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 4px 8px; border-radius: 4px;
+}
+.kpi-stacked-row + .kpi-stacked-row { border-top: 1px dashed #EEF2F8; padding-top: 10px; }
+.kpi-stacked-row .value {
+  font-family: var(--num-font); font-size: 22px; font-weight: 500;
+  color: #344054; white-space: nowrap; letter-spacing: .2px;
+}
+.kpi-stacked-row .value .unit {
+  font-family: var(--font); font-size: 10px; color: var(--text-3);
+  margin-left: 2px; font-weight: 400;
+}
+.kpi-stacked-row .value.green { color: #1FA97C; }
+.kpi-stacked-row .label {
+  font-size: 11px; color: #66748A; margin-top: 4px;
+}
+.kpi-stacked-row .note {
+  font-size: 10px; color: var(--text-3); margin-top: 2px;
+}
+.kpi-stacked-row .help {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #E6EBF3; color: #7A889C; font-size: 9px;
+  margin-left: 3px; cursor: help;
+}
 
 /* ---------- 总览卡 / hero ---------- */
 .hero-body { display: flex; align-items: center; gap: 6px; padding: 6px 12px 8px 10px; }
@@ -723,7 +764,12 @@ h1, h2, h3, h4, p { margin: 0; }
   .grid-split, .grid-split-rev, .grid-two { grid-template-columns: minmax(0, 1fr); }
   .report-layout { grid-template-columns: minmax(0, 1fr); }
   .kpi-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .kpi:nth-child(4)::before { display: none; }
+  .kpi:nth-child(4)::before, .kpi:nth-child(7)::before { display: none; }
+  .kpi-stacked { grid-column: span 3; border-top: 1px solid #EEF2F7; border-bottom: 1px solid #EEF2F7; }
+  .kpi-stacked::before, .kpi-stacked::after { display: none; }
+  .kpi-stacked { flex-direction: row; gap: 0; justify-content: space-around; padding: 10px 12px; }
+  .kpi-stacked-row + .kpi-stacked-row { border-top: 0; border-left: 1px dashed #EEF2F8; padding-top: 4px; padding-left: 18px; }
+  .kpi-stacked-row { flex: 1; }
   .lifecycle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stage::after { display: none; }
   .sidebar { width: 190px; flex-basis: 190px; }
@@ -732,6 +778,8 @@ h1, h2, h3, h4, p { margin: 0; }
   .app { min-width: 0; }
   .sidebar { display: none; }
   .kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpi-stacked { grid-column: span 2; flex-direction: column; gap: 8px; padding: 10px 10px; }
+  .kpi-stacked-row + .kpi-stacked-row { border-left: 0; border-top: 1px dashed #EEF2F8; padding-top: 10px; padding-left: 8px; }
   .alert-right { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
