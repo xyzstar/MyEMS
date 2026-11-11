@@ -321,31 +321,12 @@ h1, h2, h3, h4, p { margin: 0; }
   margin-left: 3px; cursor: help;
 }
 
-/* ---------- 总览卡 / hero ---------- */
-.hero-body { display: flex; align-items: center; gap: 6px; padding: 6px 12px 8px 10px; }
-.hero-illus { width: 104px; flex: none; display: flex; align-items: flex-end; justify-content: center; }
-.hero-illus svg { width: 104px; height: 104px; }
-.hero-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: 1; gap: 2px; }
-.hero-metric { position: relative; padding: 2px 8px 2px 12px; min-width: 0; }
-.hero-metric + .hero-metric::before {
-  content: ""; position: absolute; left: 0; top: 12%; height: 70%;
-  width: 1px; background: #EFF3F9;
-}
-.hm-value {
-  font-family: var(--num-font); font-size: 19px; font-weight: 500;
-  color: var(--blue); white-space: nowrap; letter-spacing: .2px;
-}
-.hm-value em { font-style: normal; font-family: var(--font); font-size: 10px; color: var(--text-3); margin-left: 2px; }
-.hm-label { font-size: 11.5px; color: #66748A; margin-top: 5px; line-height: 1.5; }
-.hm-label span { display: block; font-size: 10px; color: #A2ADBC; }
-.hm-trend { font-size: 10.5px; margin-top: 3px; color: var(--text-3); }
-.hm-trend .down { color: #1FA97C; }
-.hero-progress { padding: 2px 16px 14px; }
-.hero-progress .hp-top {
-  display: flex; justify-content: space-between;
-  font-size: 11px; color: var(--text-3); margin-bottom: 5px;
-}
-.hero-progress .hp-top b { color: #46566C; font-weight: 500; }
+/* ---------- 布局 / 进度条 ---------- */
+/* 整行宽卡片 */
+.grid-full { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.grid-full .range-body { padding-right: 130px; }
+.grid-full .range-metrics { max-width: 720px; }
+
 .progress-track { height: 6px; border-radius: 3px; background: #EDF1F8; overflow: hidden; }
 .progress-track i {
   display: block; height: 100%; border-radius: 3px;
@@ -785,13 +766,11 @@ h1, h2, h3, h4, p { margin: 0; }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1360px) {
-  .hm-value { font-size: 20px; }
   .range-illus { width: 96px; }
   .range-illus svg { width: 96px; height: 76px; }
   .range-breakdown { max-width: calc(100% - 86px); }
 }
 @media (max-width: 1200px) {
-  .hero-illus { display: none; }
   .grid-split, .grid-split-rev, .grid-two { grid-template-columns: minmax(0, 1fr); }
   .report-layout { grid-template-columns: minmax(0, 1fr); }
   .kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
