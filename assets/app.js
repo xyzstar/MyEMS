@@ -463,9 +463,12 @@
     $('#pcfBody').addEventListener('click', e => {
       const el = e.target.closest('[data-pcf-detail]');
       if (!el) return;
-      $('#modelProductName').textContent = el.dataset.pcfDetail;
+      const name = el.dataset.pcfDetail;
+      $('#modelProductName').textContent = name;
+      const calcName = $('#calcProductName');
+      if (calcName) calcName.textContent = name;
       switchView('model');
-      toast('已进入「' + el.dataset.pcfDetail + '」生命周期建模（演示）');
+      toast('已进入「' + name + '」生命周期建模（演示）');
     });
   }
 
