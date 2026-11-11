@@ -1,5 +1,5 @@
 /* ===========================================================
-   元创碳控 · 原型交互与图表
+   腾昇慧心碳控 · 原型交互与图表
    =========================================================== */
 (function () {
   'use strict';
@@ -12,13 +12,13 @@
 
   /* ---------------- 视图切换 ---------------- */
   const VIEWS = {
-    overview:    { root: '碳排核算', name: '碳排总览',   title: '碳排总览 · 元创碳控' },
-    report:      { root: '碳排核算', name: '碳排报告',   title: '碳排报告 · 元创碳控' },
-    'pcf-list':  { root: '产品碳足迹', name: '产品清单',   title: '产品碳足迹 · 元创碳控' },
-    model:       { root: '产品碳足迹', name: '生命周期建模', title: '生命周期建模 · 元创碳控' },
-    reduce:      { root: '基础管理', name: '减碳管理',   title: '减碳管理 · 元创碳控' },
-    calc:        { root: '产品碳足迹', name: '碳足迹计算', title: '碳足迹计算 · 元创碳控' },
-    'pcf-report':{ root: '产品碳足迹', name: '碳足迹报告', title: '碳足迹报告 · 元创碳控' }
+    overview:    { root: '碳排核算', name: '碳排总览',   title: '碳排总览 · 腾昇慧心碳控' },
+    report:      { root: '碳排核算', name: '碳排报告',   title: '碳排报告 · 腾昇慧心碳控' },
+    'pcf-list':  { root: '产品碳足迹', name: '产品清单',   title: '产品碳足迹 · 腾昇慧心碳控' },
+    model:       { root: '产品碳足迹', name: '生命周期建模', title: '生命周期建模 · 腾昇慧心碳控' },
+    reduce:      { root: '基础管理', name: '减碳管理',   title: '减碳管理 · 腾昇慧心碳控' },
+    calc:        { root: '产品碳足迹', name: '碳足迹计算', title: '碳足迹计算 · 腾昇慧心碳控' },
+    'pcf-report':{ root: '产品碳足迹', name: '碳足迹报告', title: '碳足迹报告 · 腾昇慧心碳控' }
   };
 
   function switchView(key) {
