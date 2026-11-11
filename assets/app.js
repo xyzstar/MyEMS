@@ -540,10 +540,47 @@
     }
   });
   const listNewBtn = $('#listNewBtn');
-  if (listNewBtn) {
+  const pcfModal = $('#pcfModal');
+  if (listNewBtn && pcfModal) {
     listNewBtn.addEventListener('click', () => {
-      switchView('model');
-      openModelModal();
+      pcfModal.classList.add('show');
+      pcfModal.setAttribute('aria-hidden', 'false');
+      $('#pfName').focus();
+    });
+  }
+  if ($('#pfSubmit') && pcfModal) {
+    $('#pfSubmit').addEventListener('click', () => {
+      const name = $('#pfName').value.trim();
+      if (!name) {
+        toast('请填写产品名称');
+        $('#pfName').focus();
+        return;
+      }
+      const model = $('#pfModel').value.trim() || '—';
+      const qty = $('#pfQty').value.trim() || '1/Item(s)';
+      const cfRaw = $('#pfCf').value.trim();
+      const cf = cfRaw === '' ? '—' : parseFloat(cfRaw).toFixed(2);
+      const boundary = $('#pfBoundary').value;
+      const period = $('#pfPeriod').value.trim() || '—';
+      const unitSuffix = qty.split('/').pop().trim() || '件';
+      const now = new Date();
+      const p2 = n => String(n).padStart(2, '0');
+      const stamp = now.getFullYear() + '-' + p2(now.getMonth() + 1) + '-' + p2(now.getDate()) +
+        ' ' + p2(now.getHours()) + ':' + p2(now.getMinutes()) + ':' + p2(now.getSeconds());
+
+      PCF_PRODUCTS.unshift({
+        name: name, model: model, qty: qty, cf: cf,
+        unit: 'kgCO₂e / ' + unitSuffix,
+        boundary: boundary, period: period, updated: stamp,
+        status: '待核算', locked: false, owner: '陈思远', modeled: false
+      });
+      renderPcf();
+      pcfModal.classList.remove('show');
+      pcfModal.setAttribute('aria-hidden', 'true');
+      ['#pfName', '#pfModel', '#pfQty', '#pfCf', '#pfPeriod'].forEach(sel => {
+        const el = $(sel); if (el) el.value = '';
+      });
+      toast('「' + name + '」已创建，可在建模页补充生命周期清单');
     });
   }
   if (modelModal) {

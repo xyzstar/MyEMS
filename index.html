@@ -1249,6 +1249,54 @@
   </div>
 </div>
 
+<div class="modal" id="pcfModal" aria-hidden="true">
+  <div class="modal-mask" data-modal-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pcfTitle">
+    <div class="modal-head">
+      <h3 id="pcfTitle">新建产品碳足迹</h3>
+      <button class="modal-x" data-modal-close aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="form-item">
+          <span>产品名称<i>*</i></span>
+          <input id="pfName" type="text" placeholder="如：智能光伏逆变器 XG-5000">
+        </label>
+        <label class="form-item">
+          <span>产品型号</span>
+          <input id="pfModel" type="text" placeholder="如：XG-5000">
+        </label>
+        <label class="form-item">
+          <span>数量 / 单位</span>
+          <input id="pfQty" type="text" placeholder="如：1/台">
+        </label>
+        <label class="form-item">
+          <span>单位产品碳足迹 (kgCO₂e)</span>
+          <input id="pfCf" type="number" step="0.001" min="0" placeholder="如：42.59">
+        </label>
+        <label class="form-item">
+          <span>生命周期边界</span>
+          <select id="pfBoundary" class="f-select">
+            <option>从摇篮到坟墓</option>
+            <option>从摇篮到大门</option>
+          </select>
+        </label>
+        <label class="form-item">
+          <span>数据统计时段</span>
+          <input id="pfPeriod" type="text" placeholder="如：2026/01/01 - 2026/10/31">
+        </label>
+      </div>
+      <p class="form-tip">新建产品默认状态为「待核算」，可进入产品生命周期建模补充清单后完成核算。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>取消</button>
+      <button class="btn btn-primary" id="pfSubmit">
+        <svg class="ico ico-12"><use href="#i-check"/></svg>确认新建
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="invModal" aria-hidden="true">
   <div class="modal-mask" data-modal-close></div>
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="invTitle">
