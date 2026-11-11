@@ -509,19 +509,7 @@
     });
   }
 
-  /* ---------------- 新建建模 ---------------- */
-  const modelModal = $('#modelModal');
-  function openModelModal() {
-    if (!modelModal) return;
-    modelModal.classList.add('show');
-    modelModal.setAttribute('aria-hidden', 'false');
-    $('#nmName').focus();
-  }
-  function closeModelModal() {
-    if (!modelModal) return;
-    modelModal.classList.remove('show');
-    modelModal.setAttribute('aria-hidden', 'true');
-  }
+  /* ---------------- 弹窗通用交互 ---------------- */
   $$('[data-modal-close]').forEach(el => {
     el.addEventListener('click', e => {
       const modal = e.currentTarget.closest('.modal');
@@ -583,42 +571,6 @@
       toast('「' + name + '」已创建，可在建模页补充生命周期清单');
     });
   }
-  if (modelModal) {
-    $('#modelNewBtn').addEventListener('click', openModelModal);
-    $('#nmSubmit').addEventListener('click', () => {
-      const name = $('#nmName').value.trim();
-      if (!name) {
-        toast('请填写产品名称');
-        $('#nmName').focus();
-        return;
-      }
-      const model = $('#nmModel').value.trim() || '—';
-      const func = $('#nmUnit').value.trim() || '1 件';
-      const boundary = $('#nmBoundary').value;
-      const period = $('#nmPeriod').value.trim() || '—';
-      const unitName = func.split(/\s+/).pop() || '件';
-      const now = new Date();
-      const p2 = n => String(n).padStart(2, '0');
-      const stamp = now.getFullYear() + '-' + p2(now.getMonth() + 1) + '-' + p2(now.getDate()) +
-        ' ' + p2(now.getHours()) + ':' + p2(now.getMinutes()) + ':' + p2(now.getSeconds());
-
-      PCF_PRODUCTS.unshift({
-        name: name, model: model,
-        qty: func.replace(/\s+/, '/'),
-        cf: '—', unit: 'kgCO₂e / ' + unitName,
-        boundary: boundary, period: period, updated: stamp,
-        status: '待核算', locked: false, owner: '陈思远', modeled: false
-      });
-      renderPcf();
-      $('#modelProductName').textContent = name;
-      $('#nmName').value = '';
-      $('#nmModel').value = '';
-      closeModelModal();
-      switchView('model');
-      toast('「' + name + '」已创建，请补充生命周期清单后保存建模');
-    });
-  }
-
   /* ---------------- 保存建模 ---------------- */
   const modelSaveBtn = $('#modelSaveBtn');
   if (modelSaveBtn) {
@@ -636,6 +588,12 @@
         fillCalcOptions(name);
       }
       toast('建模已保存，「' + name + '」可在碳足迹计算中查看');
+    });
+  }
+  const modelAlloc = $('#modelAlloc');
+  if (modelAlloc) {
+    modelAlloc.addEventListener('change', () => {
+      toast('分配方法已更新为「' + modelAlloc.value + '」（演示）');
     });
   }
 
