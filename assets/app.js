@@ -16,7 +16,7 @@
     report:      { root: '碳排核算', name: '碳排报告',   title: '碳排报告 · 元创碳控' },
     'pcf-list':  { root: '产品碳足迹', name: '产品清单',   title: '产品碳足迹 · 元创碳控' },
     model:       { root: '产品碳足迹', name: '生命周期建模', title: '生命周期建模 · 元创碳控' },
-    reduce:      { root: '产品碳足迹', name: '减碳管理',   title: '减碳管理 · 元创碳控' },
+    reduce:      { root: '基础管理', name: '减碳管理',   title: '减碳管理 · 元创碳控' },
     calc:        { root: '产品碳足迹', name: '碳足迹计算', title: '碳足迹计算 · 元创碳控' },
     'pcf-report':{ root: '产品碳足迹', name: '碳足迹报告', title: '碳足迹报告 · 元创碳控' }
   };
