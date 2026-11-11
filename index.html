@@ -971,13 +971,13 @@
             <h2>碳足迹计算</h2>
             <p class="calc-product-line">
               <span class="calc-product-tag">当前产品</span>
-              <b id="calcProductName">智能光伏逆变器 XG-5000</b>
+              <select class="f-select calc-product-select" id="calcProductSelect" aria-label="选择产品"></select>
               <span class="dot-sep"></span>
-              <span>型号 XG-5000（5 kW）</span>
+              <span id="calcProductModel">型号 XG-5000（5 kW）</span>
               <span class="dot-sep"></span>
-              <span>系统边界 摇篮到大门</span>
+              <span id="calcProductBoundary">系统边界 摇篮到大门</span>
               <span class="dot-sep"></span>
-              <span>统计时段 2026/01/01 - 2026/10/31</span>
+              <span id="calcProductPeriod">统计时段 2026/01/01 - 2026/10/31</span>
             </p>
           </div>
           <div class="page-actions">
@@ -993,11 +993,11 @@
           </div>
           <div class="card-body">
             <div class="calc-hero">
-              <div class="calc-big"><span class="num">42.59</span><span class="unit">kgCO₂e / 台</span></div>
+              <div class="calc-big"><span class="num" id="calcBigNum">42.59</span><span class="unit" id="calcBigUnit">kgCO₂e / 台</span></div>
               <div class="calc-meta">
                 <div>较上版结果<b>↓ 6.4%</b></div>
-                <div>功能单位<b>1 台（5 kW）</b></div>
-                <div>系统边界<b>摇篮到大门</b></div>
+                <div>功能单位<b id="calcFuncUnit">1 台（5 kW）</b></div>
+                <div>系统边界<b id="calcBoundary">摇篮到大门</b></div>
                 <div>不确定性<b>± 8.2%</b></div>
               </div>
             </div>
