@@ -596,6 +596,21 @@
       toast('分配方法已更新为「' + modelAlloc.value + '」（演示）');
     });
   }
+  const modelCalcBtn = $('#modelCalcBtn');
+  if (modelCalcBtn) {
+    modelCalcBtn.addEventListener('click', () => {
+      const name = $('#modelProductName').textContent.trim();
+      const p = PCF_PRODUCTS.find(x => x.name === name);
+      if (!p || !p.modeled) {
+        toast('「' + name + '」尚未完成建模，暂无法查看碳足迹');
+        return;
+      }
+      if (calcSelect) calcSelect.value = name;
+      applyCalcProduct(name);
+      switchView('calc');
+      toast('已打开「' + name + '」的产品碳足迹');
+    });
+  }
 
   /* ---------------- 新增清单项 ---------------- */
   const invModal = $('#invModal');
