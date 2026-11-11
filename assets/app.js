@@ -489,15 +489,72 @@
   }
 
   const calcSelect = $('#calcProductSelect');
-  if (calcSelect) {
+  function fillCalcOptions(selected) {
+    if (!calcSelect) return;
     calcSelect.innerHTML = PCF_PRODUCTS
       .map(p => `<option value="${p.name}">${p.name}</option>`).join('');
-    calcSelect.value = '智能光伏逆变器 XG-5000';
+    if (selected) calcSelect.value = selected;
+  }
+  if (calcSelect) {
+    fillCalcOptions('智能光伏逆变器 XG-5000');
     applyCalcProduct(calcSelect.value);
     calcSelect.addEventListener('change', () => {
       applyCalcProduct(calcSelect.value);
       $('#modelProductName').textContent = calcSelect.value;
       toast('已切换至「' + calcSelect.value + '」的核算结果（演示）');
+    });
+  }
+
+  /* ---------------- 新建建模 ---------------- */
+  const modelModal = $('#modelModal');
+  function closeModelModal() {
+    if (!modelModal) return;
+    modelModal.classList.remove('show');
+    modelModal.setAttribute('aria-hidden', 'true');
+  }
+  if (modelModal) {
+    $('#modelNewBtn').addEventListener('click', () => {
+      modelModal.classList.add('show');
+      modelModal.setAttribute('aria-hidden', 'false');
+      $('#nmName').focus();
+    });
+    $$('[data-modal-close]', modelModal).forEach(el => el.addEventListener('click', closeModelModal));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModelModal();
+    });
+    $('#nmSubmit').addEventListener('click', () => {
+      const name = $('#nmName').value.trim();
+      if (!name) {
+        toast('请填写产品名称');
+        $('#nmName').focus();
+        return;
+      }
+      const model = $('#nmModel').value.trim() || '—';
+      const func = $('#nmUnit').value.trim() || '1 件';
+      const boundary = $('#nmBoundary').value;
+      const period = $('#nmPeriod').value.trim() || '—';
+      const unitName = func.split(/\s+/).pop() || '件';
+      const now = new Date();
+      const p2 = n => String(n).padStart(2, '0');
+      const stamp = now.getFullYear() + '-' + p2(now.getMonth() + 1) + '-' + p2(now.getDate()) +
+        ' ' + p2(now.getHours()) + ':' + p2(now.getMinutes()) + ':' + p2(now.getSeconds());
+
+      PCF_PRODUCTS.unshift({
+        name: name, model: model,
+        qty: func.replace(/\s+/, '/'),
+        cf: '—', unit: 'kgCO₂e / ' + unitName,
+        boundary: boundary, period: period, updated: stamp,
+        status: '待核算', locked: false, owner: '陈思远'
+      });
+      renderPcf();
+      fillCalcOptions(name);
+      applyCalcProduct(name);
+      $('#modelProductName').textContent = name;
+      $('#nmName').value = '';
+      $('#nmModel').value = '';
+      closeModelModal();
+      switchView('model');
+      toast('「' + name + '」已创建，请补充生命周期清单（演示）');
     });
   }
 

@@ -652,6 +652,9 @@
             <p>对原材料获取、生产制造、运输分销、产品使用到回收处置全阶段建模与量化，形成可追溯的清单结构。</p>
           </div>
           <div class="page-actions">
+            <button class="btn" id="modelNewBtn">
+              <svg class="ico ico-12"><use href="#i-plus"/></svg>新建建模
+            </button>
             <button class="select-chip" data-toast="产品切换（原型演示）">
               <span id="modelProductName">智能光伏逆变器 XG-5000</span>
               <svg class="ico ico-12"><use href="#i-chev-down"/></svg>
@@ -1198,6 +1201,56 @@
       </section>
 
     </main>
+  </div>
+</div>
+
+<div class="modal" id="modelModal" aria-hidden="true">
+  <div class="modal-mask" data-modal-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modelModalTitle">
+    <div class="modal-head">
+      <h3 id="modelModalTitle">新建产品建模</h3>
+      <button class="modal-x" data-modal-close aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="form-item">
+          <span>产品名称<i>*</i></span>
+          <input id="nmName" type="text" placeholder="如：智能储能柜 ESS-200">
+        </label>
+        <label class="form-item">
+          <span>产品型号</span>
+          <input id="nmModel" type="text" placeholder="如：ESS-200">
+        </label>
+        <label class="form-item">
+          <span>功能单位</span>
+          <input id="nmUnit" type="text" value="1 台">
+        </label>
+        <label class="form-item">
+          <span>系统边界</span>
+          <select id="nmBoundary" class="f-select">
+            <option selected>从摇篮到坟墓</option>
+            <option>从摇篮到大门</option>
+          </select>
+        </label>
+        <label class="form-item">
+          <span>数据统计时段</span>
+          <input id="nmPeriod" type="text" value="2026/01/01 - 2026/10/31">
+        </label>
+        <label class="form-item">
+          <span>分配方法</span>
+          <select id="nmAlloc" class="f-select">
+            <option>按质量分配</option>
+            <option>按产值分配</option>
+            <option>按产量分配</option>
+          </select>
+        </label>
+      </div>
+      <p class="form-tip">创建后将生成空白生命周期清单，可在建模页逐阶段补充活动数据与排放因子。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>取消</button>
+      <button class="btn btn-primary" id="nmSubmit">创建并开始建模</button>
+    </div>
   </div>
 </div>
 
