@@ -409,13 +409,13 @@
 
   /* ---------------- 产品清单 ---------------- */
   const PCF_PRODUCTS = [
-    { name: '2022年卡塔尔世界杯吉祥物摆件', model: 'SCM', qty: '1/Item(s)', cf: '0.109', unit: 'kgCO₂e / 件', boundary: '从摇篮到大门', period: '2022/08/01 - 2022/09/30', updated: '2026-03-16 10:44:23', status: '核算生成', locked: false, owner: '杜*婷' },
-    { name: '牛仔裤', model: '混纺 49.6g 面料', qty: '100/Piece(s)', cf: '49.1', unit: 'kgCO₂e / 件', boundary: '从摇篮到大门', period: '2022/10/05 - 2022/11/01', updated: '2024-10-18 17:31:58', status: '核算生成', locked: true, owner: '杜*婷' },
-    { name: '动力电池（磷酸铁锂）', model: '28kWh', qty: '1/Item(s)', cf: '230', unit: 'kgCO₂e / 件', boundary: '从摇篮到大门', period: '2021/01/01 - 2021/12/31', updated: '2024-05-28 10:50:23', status: '核算生成', locked: true, owner: '杜*婷' },
-    { name: '洗洁精', model: '1kg', qty: '700000/Item(s)', cf: '1', unit: 'kgCO₂e / 件', boundary: '从摇篮到大门', period: '2023/04/01 - 2023/04/09', updated: '2024-05-21 17:07:58', status: '核算生成', locked: true, owner: '杜*婷' },
-    { name: '智能光伏逆变器 XG-5000', model: 'XG-5000（5 kW）', qty: '1/台', cf: '42.59', unit: 'kgCO₂e / 台', boundary: '从摇篮到大门', period: '2026/01/01 - 2026/10/31', updated: '2026-11-06 14:20:11', status: '核算生成', locked: false, owner: '陈思远' },
-    { name: '铝合金结构件', model: 'AL-220', qty: '1000/Piece(s)', cf: '8.42', unit: 'kgCO₂e / 件', boundary: '从摇篮到大门', period: '2026/03/01 - 2026/09/30', updated: '2026-10-30 09:12:36', status: '核算中', locked: false, owner: '林书禾' },
-    { name: '瓦楞包装纸箱', model: 'CB-30', qty: '500/Item(s)', cf: '0.86', unit: 'kgCO₂e / 只', boundary: '从摇篮到大门', period: '2026/02/01 - 2026/08/31', updated: '2026-10-12 16:05:04', status: '待核算', locked: false, owner: '林书禾' }
+    { name: '2022年卡塔尔世界杯吉祥物摆件', model: 'SCM', qty: '1/Item(s)', cf: '0.109', unit: 'kgCO₂e / 件', boundary: '从摇篮到坟墓', period: '2022/08/01 - 2022/09/30', updated: '2026-03-16 10:44:23', status: '核算生成', locked: false, owner: '杜*婷' },
+    { name: '牛仔裤', model: '混纺 49.6g 面料', qty: '100/Piece(s)', cf: '49.1', unit: 'kgCO₂e / 件', boundary: '从摇篮到坟墓', period: '2022/10/05 - 2022/11/01', updated: '2024-10-18 17:31:58', status: '核算生成', locked: true, owner: '杜*婷' },
+    { name: '动力电池（磷酸铁锂）', model: '28kWh', qty: '1/Item(s)', cf: '230', unit: 'kgCO₂e / 件', boundary: '从摇篮到坟墓', period: '2021/01/01 - 2021/12/31', updated: '2024-05-28 10:50:23', status: '核算生成', locked: true, owner: '杜*婷' },
+    { name: '洗洁精', model: '1kg', qty: '700000/Item(s)', cf: '1', unit: 'kgCO₂e / 件', boundary: '从摇篮到坟墓', period: '2023/04/01 - 2023/04/09', updated: '2024-05-21 17:07:58', status: '核算生成', locked: true, owner: '杜*婷' },
+    { name: '智能光伏逆变器 XG-5000', model: 'XG-5000（5 kW）', qty: '1/台', cf: '42.59', unit: 'kgCO₂e / 台', boundary: '从摇篮到坟墓', period: '2026/01/01 - 2026/10/31', updated: '2026-11-06 14:20:11', status: '核算生成', locked: false, owner: '陈思远' },
+    { name: '铝合金结构件', model: 'AL-220', qty: '1000/Piece(s)', cf: '8.42', unit: 'kgCO₂e / 件', boundary: '从摇篮到坟墓', period: '2026/03/01 - 2026/09/30', updated: '2026-10-30 09:12:36', status: '核算中', locked: false, owner: '林书禾' },
+    { name: '瓦楞包装纸箱', model: 'CB-30', qty: '500/Item(s)', cf: '0.86', unit: 'kgCO₂e / 只', boundary: '从摇篮到坟墓', period: '2026/02/01 - 2026/08/31', updated: '2026-10-12 16:05:04', status: '待核算', locked: false, owner: '林书禾' }
   ];
 
   const PCF_STATUS_CLASS = { '核算生成': 'chart', '核算中': 'doing', '待核算': 'todo2' };
