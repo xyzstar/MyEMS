@@ -465,7 +465,9 @@
       if (!el) return;
       const name = el.dataset.pcfDetail;
       const prod = PCF_PRODUCTS.find(x => x.name === name);
-      $('#modelProductName').textContent = name;
+      const ms = $('#modelProductSelect');
+      if (ms) ms.value = name;
+      applyModelProduct(name);
       if (prod && prod.modeled) {
         const cs = $('#calcProductSelect');
         if (cs) cs.value = name;
@@ -504,8 +506,35 @@
     applyCalcProduct(calcSelect.value);
     calcSelect.addEventListener('change', () => {
       applyCalcProduct(calcSelect.value);
-      $('#modelProductName').textContent = calcSelect.value;
+      const ms = $('#modelProductSelect');
+      if (ms) ms.value = calcSelect.value;
+      applyModelProduct(calcSelect.value);
       toast('已切换至「' + calcSelect.value + '」的核算结果（演示）');
+    });
+  }
+
+  /* ---------------- 建模产品切换 ---------------- */
+  const modelSelect = $('#modelProductSelect');
+  function applyModelProduct(name) {
+    const p = PCF_PRODUCTS.find(x => x.name === name);
+    if (!p) return;
+    const set = (sel, txt) => { const el = $(sel); if (el) el.textContent = txt; };
+    set('#modelInfoModel', p.model);
+    set('#modelInfoBoundary', p.boundary);
+    set('#modelInfoUnit', p.qty.replace(/\//g, ' ').replace(/\s+/g, ' ').trim());
+  }
+  function fillModelOptions(selected) {
+    if (!modelSelect) return;
+    modelSelect.innerHTML = PCF_PRODUCTS
+      .map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+    if (selected) modelSelect.value = selected;
+  }
+  if (modelSelect) {
+    fillModelOptions('智能光伏逆变器 XG-5000');
+    applyModelProduct(modelSelect.value);
+    modelSelect.addEventListener('change', () => {
+      applyModelProduct(modelSelect.value);
+      toast('已切换至「' + modelSelect.value + '」的建模数据（演示）');
     });
   }
 
@@ -563,6 +592,8 @@
         status: '待核算', locked: false, owner: '陈思远', modeled: false
       });
       renderPcf();
+      fillModelOptions(name);
+      applyModelProduct(name);
       pcfModal.classList.remove('show');
       pcfModal.setAttribute('aria-hidden', 'true');
       ['#pfName', '#pfModel', '#pfQty', '#pfCf', '#pfPeriod'].forEach(sel => {
@@ -575,7 +606,7 @@
   const modelSaveBtn = $('#modelSaveBtn');
   if (modelSaveBtn) {
     modelSaveBtn.addEventListener('click', () => {
-      const name = $('#modelProductName').textContent.trim();
+      const name = $('#modelProductSelect').value;
       const p = PCF_PRODUCTS.find(x => x.name === name);
       if (p) {
         p.modeled = true;
@@ -599,7 +630,7 @@
   const modelCalcBtn = $('#modelCalcBtn');
   if (modelCalcBtn) {
     modelCalcBtn.addEventListener('click', () => {
-      const name = $('#modelProductName').textContent.trim();
+      const name = $('#modelProductSelect').value;
       const p = PCF_PRODUCTS.find(x => x.name === name);
       if (!p || !p.modeled) {
         toast('「' + name + '」尚未完成建模，暂无法查看碳足迹');

@@ -594,6 +594,11 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .select-chip:hover { border-color: #A9C4EA; }
 .select-chip .ico { color: #8B97A8; }
+select.select-chip {
+  font-family: var(--font); max-width: 260px; outline: none;
+  padding-right: 8px; text-overflow: ellipsis;
+}
+select.select-chip:focus { border-color: #8FB4EA; box-shadow: 0 0 0 3px rgba(47, 107, 216, .08); }
 
 /* ---------- 页面标题 ---------- */
 .page-head { display: flex; align-items: flex-end; gap: 16px; padding: 2px 2px 0; flex-wrap: wrap; }

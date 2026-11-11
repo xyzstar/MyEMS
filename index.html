@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>元创碳控 · 碳排放管理平台</title>
-<link rel="stylesheet" href="assets/style.css?v=20261111b">
+<link rel="stylesheet" href="assets/style.css?v=20261111c">
 </head>
 <body>
 
@@ -647,10 +647,7 @@
             <p>对原材料获取、生产制造、运输分销、产品使用到回收处置全阶段建模与量化，形成可追溯的清单结构。</p>
           </div>
           <div class="page-actions">
-            <button class="select-chip" data-toast="产品切换（原型演示）">
-              <span id="modelProductName">智能光伏逆变器 XG-5000</span>
-              <svg class="ico ico-12"><use href="#i-chev-down"/></svg>
-            </button>
+            <select id="modelProductSelect" class="select-chip" aria-label="切换建模产品"></select>
             <button class="btn" id="modelCalcBtn">
               <svg class="ico ico-12"><use href="#i-chart"/></svg>查看碳足迹
             </button>
@@ -772,9 +769,9 @@
           <div class="card">
             <div class="card-head"><span class="card-title">建模信息</span></div>
             <div class="card-body">
-              <div class="kv"><span>产品型号</span><strong>XG-5000（5 kW）</strong></div>
-              <div class="kv"><span>系统边界</span><strong>摇篮到坟墓</strong></div>
-              <div class="kv"><span>功能单位</span><strong>1 台逆变器</strong></div>
+              <div class="kv"><span>产品型号</span><strong id="modelInfoModel">XG-5000（5 kW）</strong></div>
+              <div class="kv"><span>系统边界</span><strong id="modelInfoBoundary">从摇篮到坟墓</strong></div>
+              <div class="kv"><span>功能单位</span><strong id="modelInfoUnit">1 台逆变器</strong></div>
               <div class="kv"><span>分配方法</span>
                 <select id="modelAlloc" class="kv-select" aria-label="修改分配方法">
                   <option>按质量分配</option>
@@ -1328,6 +1325,6 @@
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/app.js?v=20261111b"></script>
+<script src="assets/app.js?v=20261111c"></script>
 </body>
 </html>
