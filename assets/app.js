@@ -467,6 +467,8 @@
       $('#modelProductName').textContent = name;
       const calcName = $('#calcProductName');
       if (calcName) calcName.textContent = name;
+      const calcSub = $('#calcProductSub');
+      if (calcSub) calcSub.textContent = name;
       switchView('model');
       toast('已进入「' + name + '」生命周期建模（演示）');
     });
