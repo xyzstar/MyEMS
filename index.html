@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腾昇慧心碳控 · 碳排放管理平台</title>
+<link rel="stylesheet" href="assets/style.css?v=20261111d">
+</head>
+<body>
+
+<svg class="svg-sprite" aria-hidden="true">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20v-7M9 20V9M14 20v-4M19 20V5"/><path d="M2 20h20"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4c0 9-5 14-13 14H4c0-9 5-14 13-14z"/><path d="M4 20c2-6 6-9 11-11"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M9 6.5h5a2 2 0 0 1 2 2V15"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h.01M8 15h2M12 15h2M16 15h.01M8 19h2M12 19h2M16 19h.01"/></symbol>
+  <symbol id="i-report" viewBox="0 0 24 24"><path d="M8 3h8l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M16 3v5h4M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-.6 4"/><path d="M20 5v6h-6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-chev-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l9.5 17H2.5z"/><path d="M12 9v5M12 17.2v.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M15 4l5 5L9 20H4v-5z"/><path d="M13 6l5 5"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-org" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 16V7h11v9M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-recycle" viewBox="0 0 24 24"><path d="M7 7l3-4 3 4M17 10l3 5-5 1M6 14l3 5 4-3"/><path d="M10 3h4M4 15l2 4M20 12l1 5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5"/><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+</svg>
+
+<div class="app">
+
+  <!-- ================= 侧边栏 ================= -->
+  <aside class="sidebar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2.5 28 9.2v13.6L16 29.5 4 22.8V9.2z" fill="#3E7BE0" stroke="rgba(255,255,255,.35)" stroke-width=".8"/>
+        <path d="M16 8c4.2 2.2 6.2 5.3 6.2 8.6 0 4-2.9 6.9-6.2 8-3.3-1.1-6.2-4-6.2-8C9.8 13.3 11.8 10.2 16 8z" fill="#fff" opacity=".94"/>
+        <path d="M16 11.4v9.2M12.6 15.2h6.8" stroke="#2F6BD8" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+      </svg>
+      <div class="brand-text">
+        <strong>腾昇慧心碳控</strong>
+        <span>CARBON MANAGEMENT</span>
+      </div>
+    </div>
+
+    <nav class="nav scroll-thin">
+      <div class="nav-group">碳排核算</div>
+      <button class="nav-item active" data-view="overview">
+        <svg class="ico"><use href="#i-chart"/></svg>碳排总览
+      </button>
+      <button class="nav-item" data-view="report">
+        <svg class="ico"><use href="#i-doc"/></svg>碳排报告
+      </button>
+
+      <div class="nav-group">产品碳足迹</div>
+      <button class="nav-item" data-view="pcf-list">
+        <svg class="ico"><use href="#i-cube"/></svg>产品清单
+      </button>
+      <button class="nav-item" data-view="model">
+        <svg class="ico"><use href="#i-flow"/></svg>生命周期建模
+      </button>
+      <button class="nav-item" data-view="calc">
+        <svg class="ico"><use href="#i-calc"/></svg>碳足迹计算
+      </button>
+      <button class="nav-item" data-view="pcf-report">
+        <svg class="ico"><use href="#i-report"/></svg>碳足迹报告
+      </button>
+
+      <div class="nav-group">基础管理</div>
+      <button class="nav-item" data-view="reduce">
+        <svg class="ico"><use href="#i-leaf"/></svg>减碳管理
+      </button>
+      <button class="nav-item soon" data-soon="排放因子库">
+        <svg class="ico"><use href="#i-db"/></svg>排放因子库
+      </button>
+      <button class="nav-item soon" data-soon="组织与边界">
+        <svg class="ico"><use href="#i-org"/></svg>组织与边界
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <b><span class="live-dot"></span>数据接入正常</b>
+      最近同步 2026-11-09 18:00<br>
+      因子库版本 v2.1 · 原型 v1.0
+    </div>
+  </aside>
+
+  <!-- ================= 主区 ================= -->
+  <div class="main">
+    <header class="header">
+      <div class="crumbs">
+        <button class="back" aria-label="返回" data-toast="已是原型首页（演示）">
+          <svg class="ico"><use href="#i-chev-left"/></svg>
+        </button>
+        <span>首页</span>
+        <span class="sep">/</span>
+        <span id="crumbRoot">碳排核算</span>
+        <span class="sep">/</span>
+        <span class="crumb-active" id="crumbActive">碳排总览</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" aria-label="刷新数据" data-toast="数据已刷新（原型演示）">
+          <svg class="ico"><use href="#i-refresh"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="导出" data-toast="已导出当前视图（原型演示）">
+          <svg class="ico"><use href="#i-download"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="通知" data-toast="您有 2 条核算待办：范围三数据补充、11 月因子复核">
+          <svg class="ico"><use href="#i-bell"/></svg><i class="dot"></i>
+        </button>
+        <div class="header-user">
+          <div class="avatar">陈</div>
+          <div class="user-meta">
+            <b>陈思远</b>
+            <span>碳盘查员</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ============================================================
+           碳排总览
+           ============================================================ -->
+      <section class="view active" id="view-overview">
+
+        <div class="alert-bar">
+          <svg class="ico"><use href="#i-warn"/></svg>
+          <span><b>范围三数据完整度 62%</b>：上游运输、员工通勤等 4 个排放源待补充，建议优先完成范围一、范围二核算。</span>
+          <span class="link" data-toast="已打开排放源补充清单（原型演示）">去补充</span>
+          <div class="alert-right">
+            <span class="year-chip">
+              核算年度 2026
+              <svg class="ico ico-12"><use href="#i-chev-down"/></svg>
+            </span>
+            <span class="bar-sep"></span>
+            <span>数据截至 2026-11-09 18:00</span>
+          </div>
+        </div>
+
+        <div class="kpi-strip">
+          <div class="kpi">
+            <div class="kpi-label">排放总量</div>
+            <div class="kpi-value">12,847.65<span class="unit">tCO₂e</span></div>
+            <div class="kpi-note">同比 <span class="down">↓ 8.3%</span> · 华东基地 3 厂区</div>
+            <span class="kpi-type">组织边界</span>
+          </div>
+          <div class="kpi-stacked" title="绿能影响：基准用能排放与绿能减碳量">
+            <div class="kpi-stacked-row">
+              <div class="value">8,126.39<span class="unit">tCO₂e</span></div>
+              <div class="label">总用能碳排量<span class="help" title="绿能替代前，按区域电网因子与热力因子核算的外购电力、蒸汽、热力基准排放">?</span></div>
+              <div class="note">基准值 · 含未消减量</div>
+            </div>
+            <div class="kpi-stacked-row">
+              <div class="value green">1,232.97<span class="unit">tCO₂e</span></div>
+              <div class="label">绿能碳排减碳量</div>
+              <div class="note">绿电交易 + 光伏自发自用</div>
+            </div>
+            <span class="kpi-type">用能口径 · 含绿能抵消</span>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">年度剩余减碳目标</div>
+            <div class="kpi-value">5,152.35<span class="unit">tCO₂e</span></div>
+            <div class="kpi-note">目标 18,000 · 进度 <b style="color:var(--blue)">71.4%</b></div>
+            <span class="kpi-type">2026 年度</span>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">碳排强度（万元产值）</div>
+            <div class="kpi-value">1.42<span class="unit">tCO₂e/万元</span></div>
+            <div class="kpi-note">同比 <span class="down">↓ 5.2%</span> · 产值 9,047 万</div>
+            <span class="kpi-type">强度指标</span>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">碳排水平 · 国家对标</div>
+            <div class="kpi-value-level low">
+              <span class="level-circle">低</span>
+              <span class="level-badge">A 评级</span>
+            </div>
+            <div class="kpi-note">优于行业 <b style="color:#1FA97C">62%</b> 企业</div>
+            <span class="kpi-type">GB/T 32150-2015</span>
+          </div>
+        </div>
+
+        <div class="grid-full">
+          <!-- 范围详情 -->
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">范围排放详情</span>
+              <span class="card-sub">按核算边界拆解范围一 / 二 / 三</span>
+            </div>
+            <div class="range-wrap">
+              <div class="range-tabs">
+                <button class="range-tab active" data-range="1"><span>范围一</span><em>25.0%</em></button>
+                <button class="range-tab" data-range="2"><span>范围二</span><em>53.7%</em></button>
+                <button class="range-tab" data-range="3"><span>范围三</span><em>21.3%</em></button>
+              </div>
+              <div class="range-body">
+                <div class="range-headline">
+                  <h4 id="rangeTitle">范围一 · 直接排放</h4>
+                  <span class="range-tag" id="rangeTag">自己烧 · 自己开 · 自己漏</span>
+                </div>
+                <div class="range-metrics" id="rangeMetrics"></div>
+                <div class="range-breakdown" id="rangeBreakdown"></div>
+                <div class="range-dots"><i class="on"></i><i></i><i></i></div>
+              </div>
+              <div class="range-illus" id="rangeIllus"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-split">
+          <!-- 月度柱图 -->
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">月度排放量</span>
+              <div class="legend" style="margin-left:auto">
+                <span><i style="background:#2F6BD8"></i>实际</span>
+                <span><i style="background:#A9C6F0"></i>预测</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart" id="monthlyChart"></div>
+              <div class="chart-note">单位：tCO₂e · 11—12 月为按当前产量测算的预测值</div>
+            </div>
+          </div>
+
+          <!-- 趋势折线 -->
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">排放趋势与预测</span>
+              <div class="legend" style="margin-left:auto">
+                <span><i style="background:#3DBE8B"></i>上年同期</span>
+                <span><i style="background:#2F6BD8"></i>本期实际</span>
+                <span><i class="line"></i>预测</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart" id="trendChart"></div>
+              <div class="chart-note">对比上年同期下降 8.3%，主要来自绿电替代与空压机余热回收</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-split">
+          <!-- 类别占比 -->
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">排放类别占比</span>
+              <span class="card-sub">按排放源类别</span>
+            </div>
+            <div class="card-body">
+              <div class="donut-flex">
+                <div class="donut-holder" id="catDonut"></div>
+                <div class="donut-legend" id="catLegend"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 温室气体 -->
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">温室气体排放占比</span>
+              <span class="card-sub">按气体种类折算 CO₂e</span>
+            </div>
+            <div class="card-body">
+              <div class="gas-stack">
+                <i style="width:92.4%;background:#2F6BD8"></i>
+                <i style="width:4.8%;background:#4FBFA8"></i>
+                <i style="width:2.1%;background:#F2A93B"></i>
+                <i style="width:.7%;background:#8E7BE0"></i>
+              </div>
+              <div class="gas-grid">
+                <div class="gas-item">
+                  <div class="gas-line"><b>CO₂ 二氧化碳</b><span class="val">11,872.31 t</span><span class="pct">92.4%</span></div>
+                  <div class="gas-track"><i style="width:92.4%;background:#2F6BD8"></i></div>
+                </div>
+                <div class="gas-item">
+                  <div class="gas-line"><b>CH₄ 甲烷</b><span class="val">616.69 t</span><span class="pct">4.8%</span></div>
+                  <div class="gas-track"><i style="width:4.8%;background:#4FBFA8"></i></div>
+                </div>
+                <div class="gas-item">
+                  <div class="gas-line"><b>N₂O 氧化亚氮</b><span class="val">269.80 t</span><span class="pct">2.1%</span></div>
+                  <div class="gas-track"><i style="width:2.1%;background:#F2A93B"></i></div>
+                </div>
+                <div class="gas-item">
+                  <div class="gas-line"><b>HFCs 制冷剂</b><span class="val">88.85 t</span><span class="pct">0.7%</span></div>
+                  <div class="gas-track"><i style="width:.7%;background:#8E7BE0"></i></div>
+                </div>
+              </div>
+              <div class="gas-foot">
+                GWP 取值依据 IPCC AR6（100 年），已统一折算为 CO₂e
+                <span class="link" data-toast="已跳转排放因子库（原型演示）">查看排放因子 →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 排放源清单（碳排详情） -->
+        <div class="card">
+          <div class="card-head row">
+            <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+              <span class="card-title">排放源清单</span>
+              <span class="card-sub">覆盖主要排放源 8 项，占排放总量 73.5% · 数据完整度 94%</span>
+            </div>
+            <div class="head-right">
+              <div class="tabs" data-filter-target="#sourceTable">
+                <button class="tab active" data-filter="all">全部 8</button>
+                <button class="tab" data-filter="1">范围一 3</button>
+                <button class="tab" data-filter="2">范围二 2</button>
+                <button class="tab" data-filter="3">范围三 3</button>
+              </div>
+              <button class="btn" data-toast="排放源清单已导出（CSV，原型演示）">
+                <svg class="ico ico-12"><use href="#i-download"/></svg>导出清单
+              </button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table" id="sourceTable">
+              <thead>
+                <tr>
+                  <th>排放源</th>
+                  <th>范围</th>
+                  <th>活动数据</th>
+                  <th>排放因子</th>
+                  <th class="ta-r">排放量 (tCO₂e)</th>
+                  <th class="ta-r">占比</th>
+                  <th>数据状态</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-scope="1">
+                  <td class="strong">天然气锅炉房</td>
+                  <td><span class="badge s1">范围一</span></td>
+                  <td>天然气 42.6 万 m³</td>
+                  <td>21.84 tCO₂e/万 m³</td>
+                  <td class="ta-r num-cell">930.38</td>
+                  <td class="ta-r num-cell">7.2%</td>
+                  <td><span class="status ok"><i></i>已核算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="1">
+                  <td class="strong">厂内车辆与叉车</td>
+                  <td><span class="badge s1">范围一</span></td>
+                  <td>柴油 68.4 t</td>
+                  <td>3.186 tCO₂e/t</td>
+                  <td class="ta-r num-cell">217.92</td>
+                  <td class="ta-r num-cell">1.7%</td>
+                  <td><span class="status ok"><i></i>已核算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="1">
+                  <td class="strong">制冷剂逸散（R410A）</td>
+                  <td><span class="badge s1">范围一</span></td>
+                  <td>补充量 128.6 kg</td>
+                  <td>2.088 tCO₂e/kg</td>
+                  <td class="ta-r num-cell">268.52</td>
+                  <td class="ta-r num-cell">2.1%</td>
+                  <td><span class="status est"><i></i>估算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="2">
+                  <td class="strong">外购电力</td>
+                  <td><span class="badge s2">范围二</span></td>
+                  <td>8,426,300 kWh</td>
+                  <td>0.5703 tCO₂e/MWh</td>
+                  <td class="ta-r num-cell">4,805.52</td>
+                  <td class="ta-r num-cell">37.4%</td>
+                  <td><span class="status ok"><i></i>已核算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="2">
+                  <td class="strong">外购蒸汽</td>
+                  <td><span class="badge s2">范围二</span></td>
+                  <td>4,268 t</td>
+                  <td>0.2077 tCO₂e/t</td>
+                  <td class="ta-r num-cell">886.42</td>
+                  <td class="ta-r num-cell">6.9%</td>
+                  <td><span class="status ok"><i></i>已核算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="3">
+                  <td class="strong">上游干线运输</td>
+                  <td><span class="badge s3">范围三</span></td>
+                  <td>1,286,400 t·km</td>
+                  <td>0.0689 kgCO₂e/t·km</td>
+                  <td class="ta-r num-cell">886.42</td>
+                  <td class="ta-r num-cell">6.9%</td>
+                  <td><span class="status ok"><i></i>已核算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="3">
+                  <td class="strong">铝型材采购</td>
+                  <td><span class="badge s3">范围三</span></td>
+                  <td>1,842 t</td>
+                  <td>0.556 tCO₂e/t</td>
+                  <td class="ta-r num-cell">1,024.36</td>
+                  <td class="ta-r num-cell">8.0%</td>
+                  <td><span class="status ok"><i></i>已核算</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+                <tr data-scope="3">
+                  <td class="strong">员工通勤</td>
+                  <td><span class="badge s3">范围三</span></td>
+                  <td>286,400 人·km</td>
+                  <td>0.1495 kgCO₂e/人·km</td>
+                  <td class="ta-r num-cell">428.18</td>
+                  <td class="ta-r num-cell">3.3%</td>
+                  <td><span class="status todo"><i></i>待补充</span></td>
+                  <td class="ta-r"><span class="link" data-toast="查看排放源明细（原型演示）">明细</span></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">合计（含未列示的 26 项排放源）</td>
+                  <td class="ta-r">12,847.65</td>
+                  <td class="ta-r">100%</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           碳排报告
+           ============================================================ -->
+      <section class="view" id="view-report">
+        <div class="page-head">
+          <div>
+            <h2>碳排报告</h2>
+            <p>依据核算边界与排放结果自动生成报告，支持在线预览与导出；报告结构与版式可按企业要求定制。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn" id="orgReportPreviewBtn">
+              <svg class="ico ico-12"><use href="#i-doc"/></svg>预览
+            </button>
+            <button class="btn" id="orgReportExportBtn">
+              <svg class="ico ico-12"><use href="#i-download"/></svg>导出
+            </button>
+            <button class="btn btn-primary" id="orgReportPrintBtn">
+              <svg class="ico ico-12"><use href="#i-print"/></svg>打印
+            </button>
+          </div>
+        </div>
+
+        <div class="report-layout">
+          <div class="paper">
+            <div class="paper-top">
+              <div class="paper-brand"><span class="brand-dot"></span>腾昇慧心碳控 · 碳排核算</div>
+              <span class="paper-std">ISO 14064-1:2018</span>
+            </div>
+            <div class="paper-eyebrow">ORGANIZATIONAL GREENHOUSE GAS INVENTORY REPORT</div>
+            <h1>2026 年度组织温室气体排放报告</h1>
+            <p class="paper-sub">华东制造基地（上海 · 苏州 · 宁波）</p>
+
+            <div class="paper-meta">
+              <div><span>编制单位</span><strong>腾昇慧心智控科技有限公司</strong></div>
+              <div><span>报告期间</span><strong>2026.01.01 — 2026.12.31</strong></div>
+              <div><span>核算标准</span><strong>ISO 14064-1:2018</strong></div>
+              <div><span>数据截止</span><strong>2026.11.09</strong></div>
+            </div>
+
+            <div class="paper-rule"></div>
+
+            <h3>一、报告摘要</h3>
+            <p>本报告覆盖华东制造基地三个厂区的组织边界，核算范围一、范围二及范围三温室气体排放。截至数据截止日，基地排放总量为 12,847.65 tCO₂e，较上年同期下降 8.3%；其中范围一 3,214.28 tCO₂e、范围二 6,893.42 tCO₂e、范围三 2,739.95 tCO₂e。范围三数据完整度 62%，上游运输与员工通勤数据仍在补充，最终报出前将完成复核。</p>
+
+            <h3>二、排放结果汇总</h3>
+            <table class="paper-table">
+              <thead>
+                <tr><th>范围</th><th>排放类别</th><th class="n">排放量 (tCO₂e)</th><th class="n">占比</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>范围一</td><td>直接温室气体排放</td><td class="n">3,214.28</td><td class="n">25.0%</td></tr>
+                <tr><td>范围二</td><td>能源间接排放</td><td class="n">6,893.42</td><td class="n">53.7%</td></tr>
+                <tr><td>范围三</td><td>其他间接（价值链）排放</td><td class="n">2,739.95</td><td class="n">21.3%</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td colspan="2">合计</td><td class="n">12,847.65</td><td class="n">100%</td></tr>
+              </tfoot>
+            </table>
+
+            <h3>三、核算方法与数据质量</h3>
+            <p>范围一采用排放因子法核算固定燃烧、移动燃烧、逸散及过程排放；范围二按区域电网排放因子计算外购电力间接排放；范围三采用投入产出法与供应商实测数据相结合的方式核算。活动数据优先取自计量表具与业务系统，排放因子来自 2026 中国区域电网因子 v2.1 及 Ecoinvent 3.10 数据库。</p>
+
+            <div class="paper-foot">
+              <span>腾昇慧心智控科技有限公司 · 碳排核算中心</span>
+              <span>第 1 页 / 共 18 页</span>
+            </div>
+          </div>
+
+          <div class="report-side">
+            <div class="card">
+              <div class="card-head"><span class="card-title">报告配置</span></div>
+              <div class="card-body">
+                <div class="kv"><span>报告模板</span><strong>组织温室气体排放报告</strong></div>
+                <div class="kv"><span>核算标准</span><strong>ISO 14064-1:2018</strong></div>
+                <div class="kv"><span>包含范围三</span><button class="switch on" role="switch" aria-checked="true" aria-label="包含范围三"><i></i></button></div>
+                <div class="kv"><span>排放因子版本</span><strong>电网因子 v2.1</strong></div>
+                <div class="kv"><span>报告语言</span><strong>中文</strong></div>
+                <div class="kv"><span>报告样式</span><strong><span class="pill pill-blue">标准版 · 可定制</span></strong></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><span class="card-title">报告完整性</span><span class="card-sub" style="margin-left:auto">82%</span></div>
+              <div class="card-body">
+                <div class="progress-track green" style="margin-bottom:6px"><i style="width:82%"></i></div>
+                <div class="check-row"><span class="dot ok"></span>组织边界与核算边界<em class="ok">已完成</em></div>
+                <div class="check-row"><span class="dot ok"></span>排放源识别与分类<em class="ok">已完成</em></div>
+                <div class="check-row"><span class="dot est"></span>活动数据复核<em>96% · 待复核</em></div>
+                <div class="check-row"><span class="dot ok"></span>排放因子适用性<em class="ok">已完成</em></div>
+                <div class="check-row"><span class="dot warn"></span>不确定性分析<em class="warn">进行中</em></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><span class="card-title">版本记录</span></div>
+              <div class="card-body">
+                <div class="timeline">
+                  <div class="tl-item on">
+                    <i></i>
+                    <div><strong>v1.2 · 生成报告初稿</strong><span>2026-11-09 18:24 · 陈思远</span></div>
+                  </div>
+                  <div class="tl-item">
+                    <i></i>
+                    <div><strong>v1.1 · 补充范围三数据</strong><span>2026-10-28 10:12 · 林书禾</span></div>
+                  </div>
+                  <div class="tl-item">
+                    <i></i>
+                    <div><strong>v1.0 · 创建年度报告</strong><span>2026-10-12 09:40 · 陈思远</span></div>
+                  </div>
+                </div>
+                <div class="split-foot">
+                  <span>提示：报告无统一强制格式，可按集团或客户要求定制章节与封面。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           产品清单
+           ============================================================ -->
+      <section class="view" id="view-pcf-list">
+        <div class="page-head">
+          <div>
+            <h2 class="title-with-badge">
+              产品碳足迹
+              <span class="cert-badge"><svg class="ico ico-10"><use href="#i-check"/></svg>已认证</span>
+              <span class="cert-badge sgs">SGS</span>
+            </h2>
+            <p>统一管理全部产品的碳足迹核算档案，可查看单位产品碳足迹、生命周期边界与数据统计时段。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="listNewBtn">
+              <svg class="ico ico-12"><use href="#i-plus"/></svg>新建产品碳足迹
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="filter-bar">
+            <label class="f-input">
+              <svg class="ico ico-14"><use href="#i-search"/></svg>
+              <input id="pcfSearch" type="text" placeholder="请输入关键词搜索">
+            </label>
+            <select class="f-select" id="pcfStatus">
+              <option value="all">请选择状态</option>
+              <option value="核算生成">核算生成</option>
+              <option value="核算中">核算中</option>
+              <option value="待核算">待核算</option>
+            </select>
+            <select class="f-select" id="pcfOwner">
+              <option value="all">请选择创建人</option>
+              <option value="杜*婷">杜*婷</option>
+              <option value="陈思远">陈思远</option>
+              <option value="林书禾">林书禾</option>
+            </select>
+            <div class="f-date">
+              <span>创建日期</span>
+              <input type="date" value="2026-01-01">
+              <em>—</em>
+              <input type="date" value="2026-11-11">
+            </div>
+            <button class="btn btn-sm" data-toast="查询条件已应用（原型演示）">查询</button>
+            <button class="btn btn-sm" id="pcfReset">重置</button>
+          </div>
+          <div class="table-scroll">
+            <table class="table pcf-table">
+              <thead>
+                <tr>
+                  <th>产品名称</th>
+                  <th>型号</th>
+                  <th>数 / 单位</th>
+                  <th class="ta-r">单位产品碳足迹</th>
+                  <th>生命周期边界</th>
+                  <th>数据统计时段</th>
+                  <th>更新时间</th>
+                  <th>状态</th>
+                  <th>是否锁定</th>
+                  <th>创建人</th>
+                  <th class="ta-r">操作</th>
+                </tr>
+              </thead>
+              <tbody id="pcfBody"></tbody>
+            </table>
+          </div>
+          <div class="pager">
+            <span class="pager-total" id="pcfCount">共 0 条</span>
+            <button class="pager-btn" aria-label="上一页">
+              <svg class="ico ico-12"><use href="#i-chev-left"/></svg>
+            </button>
+            <button class="pager-btn on">1</button>
+            <button class="pager-btn" aria-label="下一页" style="transform:scaleX(-1)">
+              <svg class="ico ico-12"><use href="#i-chev-left"/></svg>
+            </button>
+            <select class="f-select f-select-sm">
+              <option>10 条/页</option>
+              <option>20 条/页</option>
+              <option>50 条/页</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           产品生命周期建模
+           ============================================================ -->
+      <section class="view" id="view-model">
+        <div class="page-head">
+          <div>
+            <h2>产品生命周期建模</h2>
+            <p>对原材料获取、生产制造、运输分销、产品使用到回收处置全阶段建模与量化，形成可追溯的清单结构。</p>
+          </div>
+          <div class="page-actions">
+            <select id="modelProductSelect" class="select-chip" aria-label="切换建模产品"></select>
+            <button class="btn" id="modelCalcBtn">
+              <svg class="ico ico-12"><use href="#i-chart"/></svg>查看碳足迹
+            </button>
+            <button class="btn btn-primary" id="modelSaveBtn">
+              <svg class="ico ico-12"><use href="#i-check"/></svg>保存建模
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">生命周期阶段</span>
+            <span class="card-sub">功能单位 1 台 · 系统边界：摇篮到坟墓（Cradle-to-Grave）</span>
+            <span class="pill pill-green" style="margin-left:auto">建模完成度 100%</span>
+          </div>
+          <div class="card-body">
+            <div class="lifecycle">
+              <div class="stage hot">
+                <div class="stage-top">
+                  <span class="stage-ico"><svg class="ico ico-18"><use href="#i-cube"/></svg></span>
+                  <em>01</em>
+                </div>
+                <h4>原材料获取</h4>
+                <div class="stage-value">24.60<small>kgCO₂e</small></div>
+                <div class="stage-pct">占比 57.8%</div>
+                <div class="stage-bar"><i style="width:57.8%"></i></div>
+              </div>
+              <div class="stage">
+                <div class="stage-top">
+                  <span class="stage-ico"><svg class="ico ico-18"><use href="#i-org"/></svg></span>
+                  <em>02</em>
+                </div>
+                <h4>生产制造</h4>
+                <div class="stage-value">8.19<small>kgCO₂e</small></div>
+                <div class="stage-pct">占比 19.2%</div>
+                <div class="stage-bar"><i style="width:19.2%"></i></div>
+              </div>
+              <div class="stage">
+                <div class="stage-top">
+                  <span class="stage-ico"><svg class="ico ico-18"><use href="#i-truck"/></svg></span>
+                  <em>03</em>
+                </div>
+                <h4>运输分销</h4>
+                <div class="stage-value">3.10<small>kgCO₂e</small></div>
+                <div class="stage-pct">占比 7.3%</div>
+                <div class="stage-bar"><i style="width:7.3%"></i></div>
+              </div>
+              <div class="stage">
+                <div class="stage-top">
+                  <span class="stage-ico"><svg class="ico ico-18"><use href="#i-bolt"/></svg></span>
+                  <em>04</em>
+                </div>
+                <h4>使用阶段</h4>
+                <div class="stage-value">5.40<small>kgCO₂e</small></div>
+                <div class="stage-pct">占比 12.7%</div>
+                <div class="stage-bar"><i style="width:12.7%"></i></div>
+              </div>
+              <div class="stage">
+                <div class="stage-top">
+                  <span class="stage-ico"><svg class="ico ico-18"><use href="#i-recycle"/></svg></span>
+                  <em>05</em>
+                </div>
+                <h4>回收处置</h4>
+                <div class="stage-value">1.30<small>kgCO₂e</small></div>
+                <div class="stage-pct">占比 3.1%</div>
+                <div class="stage-bar"><i style="width:3.1%"></i></div>
+              </div>
+            </div>
+            <div class="lc-total">
+              <span>全生命周期合计</span>
+              <b>42.59 <span style="font-family:var(--font);font-size:10px;color:#98A4B5;font-weight:400">kgCO₂e / 台</span></b>
+              <span class="lc-stack">
+                <i style="width:57.8%;background:#2F6BD8"></i>
+                <i style="width:19.2%;background:#5B8DEF"></i>
+                <i style="width:7.3%;background:#4FBFA8"></i>
+                <i style="width:12.7%;background:#F2A93B"></i>
+                <i style="width:3.1%;background:#A9B8CC"></i>
+              </span>
+              <span class="spacer"></span>
+              <span>最近更新 2026-11-06 14:20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-split-rev">
+          <div class="card">
+            <div class="card-head row">
+              <span class="card-title">生命周期清单</span>
+              <span class="card-sub" id="invCount">共 9 项清单 · 按阶段归集</span>
+              <div class="head-right">
+                <button class="btn btn-sm" id="invAddBtn">
+                  <svg class="ico ico-12"><use href="#i-plus"/></svg>新增清单
+                </button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr><th>阶段</th><th>清单项</th><th>活动数据</th><th>排放因子</th><th class="ta-r">排放量 (kgCO₂e)</th><th>数据来源</th></tr>
+                </thead>
+                <tbody id="invBody">
+                  <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">铝合金外壳</td><td>0.86 kg</td><td>8.24 kgCO₂e/kg</td><td class="ta-r num-cell">7.09</td><td>供应商 EPD</td></tr>
+                  <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">功率半导体</td><td>0.12 kg</td><td>86.50 kgCO₂e/kg</td><td class="ta-r num-cell">10.38</td><td>Ecoinvent</td></tr>
+                  <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">铜线缆</td><td>0.64 kg</td><td>4.18 kgCO₂e/kg</td><td class="ta-r num-cell">2.68</td><td>Ecoinvent</td></tr>
+                  <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">工程塑料件</td><td>0.42 kg</td><td>10.60 kgCO₂e/kg</td><td class="ta-r num-cell">4.45</td><td>Ecoinvent</td></tr>
+                  <tr><td><span class="badge s1">生产制造</span></td><td class="strong">外购电力</td><td>12.4 kWh</td><td>0.5703 kgCO₂e/kWh</td><td class="ta-r num-cell">7.07</td><td>电费单</td></tr>
+                  <tr><td><span class="badge s1">生产制造</span></td><td class="strong">天然气</td><td>0.52 m³</td><td>2.16 kgCO₂e/m³</td><td class="ta-r num-cell">1.12</td><td>燃气单</td></tr>
+                  <tr><td><span class="badge s3">运输分销</span></td><td class="strong">公路运输</td><td>45 t·km</td><td>0.0689 kgCO₂e/t·km</td><td class="ta-r num-cell">3.10</td><td>物流单</td></tr>
+                  <tr><td><span class="badge s3">使用阶段</span></td><td class="strong">维护更换件</td><td>1 套</td><td>5.40 kgCO₂e/套</td><td class="ta-r num-cell">5.40</td><td>设计 BOM</td></tr>
+                  <tr><td><span class="badge s3">回收处置</span></td><td class="strong">拆解与运输</td><td>1 台</td><td>1.30 kgCO₂e/台</td><td class="ta-r num-cell">1.30</td><td>回收商</td></tr>
+                </tbody>
+                <tfoot>
+                  <tr><td colspan="4">合计</td><td class="ta-r" id="invTotal">42.59</td><td></td></tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><span class="card-title">建模信息</span></div>
+            <div class="card-body">
+              <div class="kv"><span>产品型号</span><strong id="modelInfoModel">XG-5000（5 kW）</strong></div>
+              <div class="kv"><span>系统边界</span><strong id="modelInfoBoundary">从摇篮到坟墓</strong></div>
+              <div class="kv"><span>功能单位</span><strong id="modelInfoUnit">1 台逆变器</strong></div>
+              <div class="kv"><span>分配方法</span>
+                <select id="modelAlloc" class="kv-select" aria-label="修改分配方法">
+                  <option>按质量分配</option>
+                  <option>按产值分配</option>
+                  <option>按产量分配</option>
+                </select>
+              </div>
+              <div class="kv"><span>数据质量评分</span><strong>4.2 / 5.0</strong></div>
+              <div class="bar-list" style="margin-top:14px">
+                <div class="bar-item">
+                  <div class="bl-top"><span>原材料获取</span><span class="pct">57.8%</span><em>24.60</em></div>
+                  <div class="bl-track"><i style="width:100%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>生产制造</span><span class="pct">19.2%</span><em>8.19</em></div>
+                  <div class="bl-track"><i style="width:33.3%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>运输分销</span><span class="pct">7.3%</span><em>3.10</em></div>
+                  <div class="bl-track"><i style="width:12.6%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>使用阶段</span><span class="pct">12.7%</span><em>5.40</em></div>
+                  <div class="bl-track"><i style="width:22.0%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>回收处置</span><span class="pct">3.1%</span><em>1.30</em></div>
+                  <div class="bl-track"><i style="width:5.3%"></i></div>
+                </div>
+              </div>
+              <div class="split-foot">
+                <span class="dot-sep"></span>
+                <span>清单数据来自 ERP、供应商 EPD 与 Ecoinvent 3.10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           减碳管理
+           ============================================================ -->
+      <section class="view" id="view-reduce">
+        <div class="page-head">
+          <div>
+            <h2>减碳管理</h2>
+            <p>手动填报绿色能源、工艺节能等主动减碳措施，自动折算减碳量并计入碳排目标进度。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-toast="新增减碳填报（原型演示）">
+              <svg class="ico ico-12"><use href="#i-plus"/></svg>新增减碳填报
+            </button>
+          </div>
+        </div>
+
+        <div class="mini-kpis" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
+          <div class="mini-kpi">
+            <span class="mk-icon green"><svg class="ico ico-18"><use href="#i-leaf"/></svg></span>
+            <div><div class="mk-value">1,284.62<small>tCO₂e</small></div><div class="mk-label">累计减碳量</div></div>
+          </div>
+          <div class="mini-kpi">
+            <span class="mk-icon blue"><svg class="ico ico-18"><use href="#i-bolt"/></svg></span>
+            <div><div class="mk-value">862.40<small>tCO₂e</small></div><div class="mk-label">绿色能源替代</div></div>
+          </div>
+          <div class="mini-kpi">
+            <span class="mk-icon orange"><svg class="ico ico-18"><use href="#i-trend"/></svg></span>
+            <div><div class="mk-value">356.10<small>tCO₂e</small></div><div class="mk-label">工艺节能</div></div>
+          </div>
+          <div class="mini-kpi">
+            <span class="mk-icon violet"><svg class="ico ico-18"><use href="#i-calc"/></svg></span>
+            <div><div class="mk-value">10.0<small>%</small></div><div class="mk-label">排放抵消比例</div></div>
+          </div>
+        </div>
+
+        <div class="grid-split-rev">
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">月度减碳量</span>
+              <div class="legend" style="margin-left:auto">
+                <span><i style="background:#3DBE8B"></i>绿色能源</span>
+                <span><i style="background:#7FD6BE"></i>工艺节能</span>
+                <span><i style="background:#CBEBDD"></i>其他</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart" id="reduceChart"></div>
+              <div class="chart-note">单位：tCO₂e · 减碳量按措施投运月份分摊，待核定措施暂按申报值计入</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><span class="card-title">减碳构成</span><span class="card-sub">按措施类型</span></div>
+            <div class="card-body">
+              <div class="bar-list">
+                <div class="bar-item">
+                  <div class="bl-top"><span>绿色能源替代</span><span class="pct">67.1%</span><em>862.40</em></div>
+                  <div class="bl-track"><i style="width:100%;background:linear-gradient(90deg,#8FE0C5,#3DBE8B)"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>工艺节能</span><span class="pct">27.7%</span><em>356.10</em></div>
+                  <div class="bl-track"><i style="width:41.3%;background:linear-gradient(90deg,#A9E4D2,#5FC9AB)"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>其他措施</span><span class="pct">5.1%</span><em>66.12</em></div>
+                  <div class="bl-track"><i style="width:7.7%;background:linear-gradient(90deg,#D9EFE7,#A9D9C9)"></i></div>
+                </div>
+              </div>
+              <div class="gas-foot" style="margin-top:18px">
+                减碳量 = 措施活动数据 × 基准排放因子 − 措施排放量
+                <span class="link" data-toast="查看减碳核算方法（原型演示）">核算方法</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head row">
+            <span class="card-title">减碳措施记录</span>
+            <span class="card-sub">6 项措施 · 4 项已核定</span>
+            <div class="head-right">
+              <button class="btn btn-sm" data-toast="已导出减碳措施清单（原型演示）">
+                <svg class="ico ico-12"><use href="#i-download"/></svg>导出
+              </button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr><th>措施名称</th><th>类型</th><th>核算依据</th><th class="ta-r">减碳量 (tCO₂e)</th><th>投运时间</th><th>状态</th><th></th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="strong">屋顶分布式光伏自发自用</td>
+                  <td><span class="badge s3">绿色能源</span></td>
+                  <td>自发自用 862,400 kWh × 0.5703</td>
+                  <td class="ta-r num-cell">491.83</td>
+                  <td>2026-01</td>
+                  <td><span class="status ok"><i></i>已核定</span></td>
+                  <td class="ta-r"><span class="link" data-toast="编辑减碳措施（原型演示）">编辑</span></td>
+                </tr>
+                <tr>
+                  <td class="strong">绿电交易（风电）</td>
+                  <td><span class="badge s3">绿色能源</span></td>
+                  <td>650,000 kWh × 0.5703</td>
+                  <td class="ta-r num-cell">370.57</td>
+                  <td>2026-03</td>
+                  <td><span class="status ok"><i></i>已核定</span></td>
+                  <td class="ta-r"><span class="link" data-toast="编辑减碳措施（原型演示）">编辑</span></td>
+                </tr>
+                <tr>
+                  <td class="strong">空压机余热回收</td>
+                  <td><span class="badge s1">工艺节能</span></td>
+                  <td>节约天然气 8.6 万 m³ × 21.84</td>
+                  <td class="ta-r num-cell">187.92</td>
+                  <td>2026-02</td>
+                  <td><span class="status ok"><i></i>已核定</span></td>
+                  <td class="ta-r"><span class="link" data-toast="编辑减碳措施（原型演示）">编辑</span></td>
+                </tr>
+                <tr>
+                  <td class="strong">高效电机替换</td>
+                  <td><span class="badge s1">工艺节能</span></td>
+                  <td>节电 186,400 kWh × 0.5703</td>
+                  <td class="ta-r num-cell">106.30</td>
+                  <td>2026-05</td>
+                  <td><span class="status todo"><i></i>待核定</span></td>
+                  <td class="ta-r"><span class="link" data-toast="编辑减碳措施（原型演示）">编辑</span></td>
+                </tr>
+                <tr>
+                  <td class="strong">蒸汽冷凝水回用</td>
+                  <td><span class="badge s1">工艺节能</span></td>
+                  <td>节约蒸汽 298 t × 0.2077</td>
+                  <td class="ta-r num-cell">61.88</td>
+                  <td>2026-06</td>
+                  <td><span class="status ok"><i></i>已核定</span></td>
+                  <td class="ta-r"><span class="link" data-toast="编辑减碳措施（原型演示）">编辑</span></td>
+                </tr>
+                <tr>
+                  <td class="strong">员工班车电动化</td>
+                  <td><span class="badge s2">其他</span></td>
+                  <td>替代柴油 18.6 t × 3.186</td>
+                  <td class="ta-r num-cell">66.12</td>
+                  <td>2026-04</td>
+                  <td><span class="status todo"><i></i>待核定</span></td>
+                  <td class="ta-r"><span class="link" data-toast="编辑减碳措施（原型演示）">编辑</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           碳足迹计算
+           ============================================================ -->
+      <section class="view" id="view-calc">
+        <div class="page-head">
+          <div>
+            <h2>碳足迹计算</h2>
+            <p class="calc-product-line">
+              <span class="calc-product-tag">当前产品</span>
+              <select class="f-select calc-product-select" id="calcProductSelect" aria-label="选择产品"></select>
+              <span class="dot-sep"></span>
+              <span id="calcProductModel">型号 XG-5000（5 kW）</span>
+              <span class="dot-sep"></span>
+              <span id="calcProductBoundary">系统边界 摇篮到坟墓</span>
+              <span class="dot-sep"></span>
+              <span id="calcProductPeriod">统计时段 2026/01/01 - 2026/10/31</span>
+            </p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-nav="pcf-report">查看报告</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-title">计算结果</span>
+            <span class="card-sub" id="calcProductSub">智能光伏逆变器 XG-5000</span>
+            <span class="pill pill-green" style="margin-left:auto">计算通过 · 2026-11-09 18:12</span>
+          </div>
+          <div class="card-body">
+            <div class="calc-hero">
+              <div class="calc-big"><span class="num" id="calcBigNum">42.59</span><span class="unit" id="calcBigUnit">kgCO₂e / 台</span></div>
+              <div class="calc-meta">
+                <div>较上版结果<b>↓ 6.4%</b></div>
+                <div>功能单位<b id="calcFuncUnit">1 台（5 kW）</b></div>
+                <div>系统边界<b id="calcBoundary">摇篮到坟墓</b></div>
+                <div>不确定性<b>± 8.2%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-two">
+          <div class="card">
+            <div class="card-head"><span class="card-title">计算模型</span><span class="card-sub">排放因子法</span></div>
+            <div class="card-body">
+              <div class="formula">
+                CFP <span class="op">=</span> Σ ( AD<sub>i</sub> <span class="op">×</span> EF<sub>i</sub> ) <span class="op">+</span> Σ ( M<sub>j</sub> <span class="op">×</span> EF<sub>j</sub> )
+              </div>
+              <div class="calc-note">
+                AD<sub>i</sub> 为第 i 项清单活动数据，EF<sub>i</sub> 为对应排放因子；M<sub>j</sub> 为维护/回收阶段物质量。<br>
+                计算前已按质量分配规则处理共线产品，排放因子统一采用 GWP100 折算为 CO₂e。
+              </div>
+              <div class="split-foot">
+                <span class="pill pill-blue">ISO 14067</span>
+                <span class="pill">GB/T 24067-2024</span>
+                <span class="dot-sep"></span>
+                <span>因子库 v2.1</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><span class="card-title">阶段贡献</span><span class="card-sub">kgCO₂e / 台</span></div>
+            <div class="card-body">
+              <div class="bar-list">
+                <div class="bar-item">
+                  <div class="bl-top"><span>原材料获取</span><span class="pct">57.8%</span><em>24.60</em></div>
+                  <div class="bl-track"><i style="width:100%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>生产制造</span><span class="pct">19.2%</span><em>8.19</em></div>
+                  <div class="bl-track"><i style="width:33.3%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>运输分销</span><span class="pct">7.3%</span><em>3.10</em></div>
+                  <div class="bl-track"><i style="width:12.6%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>使用阶段</span><span class="pct">12.7%</span><em>5.40</em></div>
+                  <div class="bl-track"><i style="width:22.0%"></i></div>
+                </div>
+                <div class="bar-item">
+                  <div class="bl-top"><span>回收处置</span><span class="pct">3.1%</span><em>1.30</em></div>
+                  <div class="bl-track"><i style="width:5.3%"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head row">
+            <span class="card-title">计算明细</span>
+            <span class="card-sub">来自生命周期清单 9 项</span>
+            <div class="head-right">
+              <button class="btn btn-sm" data-toast="计算明细已导出（原型演示）">
+                <svg class="ico ico-12"><use href="#i-download"/></svg>导出明细
+              </button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr><th>清单项</th><th>阶段</th><th>活动数据</th><th>排放因子</th><th class="ta-r">排放量 (kgCO₂e)</th><th class="ta-r">占比</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="strong">功率半导体</td><td>原材料获取</td><td>0.12 kg</td><td>86.50 kgCO₂e/kg</td><td class="ta-r num-cell">10.38</td><td class="ta-r num-cell">24.4%</td></tr>
+                <tr><td class="strong">铝合金外壳</td><td>原材料获取</td><td>0.86 kg</td><td>8.24 kgCO₂e/kg</td><td class="ta-r num-cell">7.09</td><td class="ta-r num-cell">16.6%</td></tr>
+                <tr><td class="strong">外购电力</td><td>生产制造</td><td>12.4 kWh</td><td>0.5703 kgCO₂e/kWh</td><td class="ta-r num-cell">7.07</td><td class="ta-r num-cell">16.6%</td></tr>
+                <tr><td class="strong">维护更换件</td><td>使用阶段</td><td>1 套</td><td>5.40 kgCO₂e/套</td><td class="ta-r num-cell">5.40</td><td class="ta-r num-cell">12.7%</td></tr>
+                <tr><td class="strong">工程塑料件</td><td>原材料获取</td><td>0.42 kg</td><td>10.60 kgCO₂e/kg</td><td class="ta-r num-cell">4.45</td><td class="ta-r num-cell">10.4%</td></tr>
+                <tr><td class="strong">公路运输</td><td>运输分销</td><td>45 t·km</td><td>0.0689 kgCO₂e/t·km</td><td class="ta-r num-cell">3.10</td><td class="ta-r num-cell">7.3%</td></tr>
+                <tr><td class="strong">铜线缆</td><td>原材料获取</td><td>0.64 kg</td><td>4.18 kgCO₂e/kg</td><td class="ta-r num-cell">2.68</td><td class="ta-r num-cell">6.3%</td></tr>
+                <tr><td class="strong">拆解与运输</td><td>回收处置</td><td>1 台</td><td>1.30 kgCO₂e/台</td><td class="ta-r num-cell">1.30</td><td class="ta-r num-cell">3.1%</td></tr>
+                <tr><td class="strong">天然气</td><td>生产制造</td><td>0.52 m³</td><td>2.16 kgCO₂e/m³</td><td class="ta-r num-cell">1.12</td><td class="ta-r num-cell">2.6%</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td colspan="4">合计</td><td class="ta-r">42.59</td><td class="ta-r">100%</td></tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           碳足迹报告
+           ============================================================ -->
+      <section class="view" id="view-pcf-report">
+        <div class="page-head">
+          <div>
+            <h2>碳足迹报告</h2>
+            <p>按 ISO 14067 与 GB/T 24067 输出产品碳足迹报告，报告内容与样式符合国家、行业标准要求。</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn" id="reportPreviewBtn">
+              <svg class="ico ico-12"><use href="#i-doc"/></svg>预览
+            </button>
+            <button class="btn" id="reportDownloadBtn">
+              <svg class="ico ico-12"><use href="#i-download"/></svg>下载 PDF
+            </button>
+            <button class="btn btn-primary" id="reportPrintBtn">
+              <svg class="ico ico-12"><use href="#i-print"/></svg>打印
+            </button>
+          </div>
+        </div>
+
+        <div class="report-layout">
+          <div class="paper">
+            <div class="paper-top">
+              <div class="paper-brand"><span class="brand-dot"></span>腾昇慧心碳控 · 产品碳足迹</div>
+              <span class="paper-std">ISO 14067:2018 / GB/T 24067-2024</span>
+            </div>
+            <div class="paper-eyebrow">PRODUCT CARBON FOOTPRINT REPORT</div>
+            <h1>智能光伏逆变器 XG-5000<br>产品碳足迹报告</h1>
+            <p class="paper-sub">功能单位：1 台（额定功率 5 kW）· 系统边界：摇篮到坟墓</p>
+
+            <div class="paper-meta">
+              <div><span>委托单位</span><strong>腾昇慧心智控科技有限公司</strong></div>
+              <div><span>产品型号</span><strong>XG-5000</strong></div>
+              <div><span>核算标准</span><strong>ISO 14067:2018</strong></div>
+              <div><span>报告版本</span><strong>v1.0 / 2026-11-09</strong></div>
+            </div>
+
+            <div class="paper-rule"></div>
+
+            <h3>一、核算结果</h3>
+            <div class="paper-kpis">
+              <div class="paper-kpi"><span>单位产品碳足迹</span><b>42.59<em>kgCO₂e/台</em></b></div>
+              <div class="paper-kpi"><span>主要贡献阶段</span><b>原材料获取<em>57.8%</em></b></div>
+              <div class="paper-kpi"><span>结果不确定性</span><b>± 8.2<em>%</em></b></div>
+            </div>
+            <p style="margin-top:14px">本报告依据 ISO 14067:2018 与 GB/T 24067-2024 对智能光伏逆变器 XG-5000 开展从摇篮到坟墓的产品碳足迹核算。核算结果显示，单位产品碳足迹为 42.59 kgCO₂e/台，其中原材料获取阶段贡献最大（57.8%），其次为生产制造（19.2%）与使用阶段（12.7%）。</p>
+
+            <h3>二、生命周期阶段排放</h3>
+            <table class="paper-table">
+              <thead>
+                <tr><th>生命周期阶段</th><th class="n">排放量 (kgCO₂e/台)</th><th class="n">占比</th><th>主要清单</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>原材料获取</td><td class="n">24.60</td><td class="n">57.8%</td><td>功率半导体、铝合金外壳</td></tr>
+                <tr><td>生产制造</td><td class="n">8.19</td><td class="n">19.2%</td><td>外购电力、天然气</td></tr>
+                <tr><td>运输分销</td><td class="n">3.10</td><td class="n">7.3%</td><td>公路运输</td></tr>
+                <tr><td>使用阶段</td><td class="n">5.40</td><td class="n">12.7%</td><td>维护更换件</td></tr>
+                <tr><td>回收处置</td><td class="n">1.30</td><td class="n">3.1%</td><td>拆解与运输</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td>合计</td><td class="n">42.59</td><td class="n">100%</td><td>—</td></tr>
+              </tfoot>
+            </table>
+
+            <div class="paper-foot">
+              <span>依据 ISO 14067:2018 / GB/T 24067-2024 编制</span>
+              <span>第 1 页 / 共 12 页</span>
+            </div>
+          </div>
+
+          <div class="report-side">
+            <div class="card">
+              <div class="card-head"><span class="card-title">报告配置</span></div>
+              <div class="card-body">
+                <div class="kv"><span>报告模板</span><strong>产品碳足迹报告（标准版）</strong></div>
+                <div class="kv"><span>核算标准</span><strong>ISO 14067 / GB/T 24067</strong></div>
+                <div class="kv"><span>系统边界</span><strong>摇篮到坟墓</strong></div>
+                <div class="kv"><span>功能单位</span><strong>1 台（5 kW）</strong></div>
+                <div class="kv"><span>分配方法</span><strong>按质量分配</strong></div>
+                <div class="kv"><span>报告语言</span><strong>中文</strong></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><span class="card-title">标准符合性检查</span><span class="card-sub" style="margin-left:auto">4 / 5</span></div>
+              <div class="card-body">
+                <div class="check-row"><span class="dot ok"></span>功能单位与系统边界<em class="ok">符合</em></div>
+                <div class="check-row"><span class="dot ok"></span>生命周期清单完整性<em class="ok">符合</em></div>
+                <div class="check-row"><span class="dot ok"></span>排放因子来源可追溯<em class="ok">符合</em></div>
+                <div class="check-row"><span class="dot ok"></span>分配规则说明<em class="ok">符合</em></div>
+                <div class="check-row"><span class="dot warn"></span>不确定性与敏感性分析<em class="warn">待补充</em></div>
+                <div class="split-foot">
+                  <span>提示：报告样式已按国标模板预置，可上传企业模板替换。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><span class="card-title">关联文件</span></div>
+              <div class="card-body">
+                <div class="kv"><span>生命周期清单</span><strong class="link" data-nav="model">查看建模 →</strong></div>
+                <div class="kv"><span>计算过程</span><strong class="link" data-nav="calc">查看计算 →</strong></div>
+                <div class="kv"><span>排放因子库</span><strong>v2.1 / 2026-10</strong></div>
+                <div class="kv"><span>生成时间</span><strong>2026-11-09 18:30</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="modal" id="pcfModal" aria-hidden="true">
+  <div class="modal-mask" data-modal-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pcfTitle">
+    <div class="modal-head">
+      <h3 id="pcfTitle">新建产品碳足迹</h3>
+      <button class="modal-x" data-modal-close aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="form-item">
+          <span>产品名称<i>*</i></span>
+          <input id="pfName" type="text" placeholder="如：智能光伏逆变器 XG-5000">
+        </label>
+        <label class="form-item">
+          <span>产品型号</span>
+          <input id="pfModel" type="text" placeholder="如：XG-5000">
+        </label>
+        <label class="form-item">
+          <span>数量 / 单位</span>
+          <input id="pfQty" type="text" placeholder="如：1/台">
+        </label>
+        <label class="form-item">
+          <span>单位产品碳足迹 (kgCO₂e)</span>
+          <input id="pfCf" type="number" step="0.001" min="0" placeholder="如：42.59">
+        </label>
+        <label class="form-item">
+          <span>生命周期边界</span>
+          <select id="pfBoundary" class="f-select">
+            <option>从摇篮到坟墓</option>
+            <option>从摇篮到大门</option>
+          </select>
+        </label>
+        <label class="form-item">
+          <span>数据统计时段</span>
+          <input id="pfPeriod" type="text" placeholder="如：2026/01/01 - 2026/10/31">
+        </label>
+      </div>
+      <p class="form-tip">新建产品默认状态为「待核算」，可进入产品生命周期建模补充清单后完成核算。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>取消</button>
+      <button class="btn btn-primary" id="pfSubmit">
+        <svg class="ico ico-12"><use href="#i-check"/></svg>确认新建
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="invModal" aria-hidden="true">
+  <div class="modal-mask" data-modal-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="invTitle">
+    <div class="modal-head">
+      <h3 id="invTitle">新增清单项</h3>
+      <button class="modal-x" data-modal-close aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="form-item">
+          <span>生命周期阶段<i>*</i></span>
+          <select id="ivStage" class="f-select">
+            <option>原材料获取</option>
+            <option>生产制造</option>
+            <option>运输分销</option>
+            <option>使用阶段</option>
+            <option>回收处置</option>
+          </select>
+        </label>
+        <label class="form-item">
+          <span>清单项名称<i>*</i></span>
+          <input id="ivItem" type="text" placeholder="如：铝合金外壳">
+        </label>
+        <label class="form-item">
+          <span>活动数据</span>
+          <input id="ivActivity" type="text" placeholder="如：0.86 kg">
+        </label>
+        <label class="form-item">
+          <span>排放因子</span>
+          <input id="ivFactor" type="text" placeholder="如：8.24 kgCO₂e/kg">
+        </label>
+        <label class="form-item">
+          <span>排放量 (kgCO₂e)<i>*</i></span>
+          <input id="ivAmount" type="number" step="0.01" min="0" placeholder="如：7.09">
+        </label>
+        <label class="form-item">
+          <span>数据来源</span>
+          <input id="ivSource" type="text" placeholder="如：供应商 EPD">
+        </label>
+      </div>
+      <p class="form-tip">新增后计入生命周期清单与合计排放量，阶段占比按现有阶段值归集展示。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>取消</button>
+      <button class="btn btn-primary" id="ivSubmit">
+        <svg class="ico ico-12"><use href="#i-check"/></svg>确认新增
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="reportPreviewModal" aria-hidden="true">
+  <div class="modal-mask" data-modal-close></div>
+  <div class="modal-box wide" role="dialog" aria-modal="true" aria-labelledby="reportPreviewTitle">
+    <div class="modal-head">
+      <h3 id="reportPreviewTitle">报告预览</h3>
+      <span class="modal-head-tip">A4 · 共 12 页 · v1.0</span>
+      <button class="modal-x" data-modal-close aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body preview-body" id="reportPreviewBody"></div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>关闭</button>
+      <button class="btn" id="previewDownloadBtn">
+        <svg class="ico ico-12"><use href="#i-download"/></svg>下载 PDF
+      </button>
+      <button class="btn btn-primary" id="previewPrintBtn">
+        <svg class="ico ico-12"><use href="#i-print"/></svg>打印
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/app.js?v=20261111d"></script>
+</body>
+</html>
