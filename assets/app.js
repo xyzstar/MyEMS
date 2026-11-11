@@ -14,6 +14,7 @@
   const VIEWS = {
     overview:    { root: '碳排核算', name: '碳排总览',   title: '碳排总览 · 元创碳控' },
     report:      { root: '碳排核算', name: '碳排报告',   title: '碳排报告 · 元创碳控' },
+    'pcf-list':  { root: '产品碳足迹', name: '产品清单',   title: '产品碳足迹 · 元创碳控' },
     model:       { root: '产品碳足迹', name: '生命周期建模', title: '生命周期建模 · 元创碳控' },
     reduce:      { root: '产品碳足迹', name: '减碳管理',   title: '减碳管理 · 元创碳控' },
     calc:        { root: '产品碳足迹', name: '碳足迹计算', title: '碳足迹计算 · 元创碳控' },
@@ -406,7 +407,70 @@
     });
   });
 
+  /* ---------------- 产品清单 ---------------- */
+  const PCF_PRODUCTS = [
+    { name: '2022年卡塔尔世界杯吉祥物摆件', model: 'SCM', qty: '1/Item(s)', cf: '0.109', boundary: '从摇篮到大门', period: '2022/08/01 - 2022/09/30', updated: '2026-03-16 10:44:23', status: '核算生成', locked: false, owner: '杜*婷' },
+    { name: '牛仔裤', model: '混纺 49.6g 面料', qty: '100/Piece(s)', cf: '49.1', boundary: '从摇篮到大门', period: '2022/10/05 - 2022/11/01', updated: '2024-10-18 17:31:58', status: '核算生成', locked: true, owner: '杜*婷' },
+    { name: '动力电池（磷酸铁锂）', model: '28kWh', qty: '1/Item(s)', cf: '230', boundary: '从摇篮到大门', period: '2021/01/01 - 2021/12/31', updated: '2024-05-28 10:50:23', status: '核算生成', locked: true, owner: '杜*婷' },
+    { name: '洗洁精', model: '1kg', qty: '700000/Item(s)', cf: '1', boundary: '从摇篮到大门', period: '2023/04/01 - 2023/04/09', updated: '2024-05-21 17:07:58', status: '核算生成', locked: true, owner: '杜*婷' },
+    { name: '智能光伏逆变器 XG-5000', model: 'XG-5000（5 kW）', qty: '1/台', cf: '42.59', boundary: '从摇篮到大门', period: '2026/01/01 - 2026/10/31', updated: '2026-11-06 14:20:11', status: '核算生成', locked: false, owner: '陈思远' },
+    { name: '铝合金结构件', model: 'AL-220', qty: '1000/Piece(s)', cf: '8.42', boundary: '从摇篮到大门', period: '2026/03/01 - 2026/09/30', updated: '2026-10-30 09:12:36', status: '核算中', locked: false, owner: '林书禾' },
+    { name: '瓦楞包装纸箱', model: 'CB-30', qty: '500/Item(s)', cf: '0.86', boundary: '从摇篮到大门', period: '2026/02/01 - 2026/08/31', updated: '2026-10-12 16:05:04', status: '待核算', locked: false, owner: '林书禾' }
+  ];
+
+  const PCF_STATUS_CLASS = { '核算生成': 'chart', '核算中': 'doing', '待核算': 'todo2' };
+
+  function renderPcf() {
+    const body = $('#pcfBody');
+    if (!body) return;
+    const kw = ($('#pcfSearch').value || '').trim().toLowerCase();
+    const st = $('#pcfStatus').value;
+    const ow = $('#pcfOwner').value;
+    const rows = PCF_PRODUCTS.filter(p =>
+      (!kw || (p.name + ' ' + p.model).toLowerCase().includes(kw)) &&
+      (st === 'all' || p.status === st) &&
+      (ow === 'all' || p.owner === ow)
+    );
+    body.innerHTML = rows.length ? rows.map(p => `
+      <tr>
+        <td><span class="prod-name" data-pcf-detail="${p.name}">${p.name}</span></td>
+        <td>${p.model}</td>
+        <td>${p.qty}</td>
+        <td class="ta-r cf">${p.cf}</td>
+        <td>${p.boundary}</td>
+        <td>${p.period}</td>
+        <td class="mono">${p.updated}</td>
+        <td><span class="status ${PCF_STATUS_CLASS[p.status]}"><i></i>${p.status}</span></td>
+        <td><span class="lock-tag${p.locked ? ' on' : ''}">${p.locked ? '是' : '否'}</span></td>
+        <td class="owner">${p.owner}</td>
+        <td class="ta-r"><span class="op-link" data-pcf-detail="${p.name}">详情</span></td>
+      </tr>`).join('')
+      : '<tr><td colspan="11" style="text-align:center;color:#98A4B5;padding:36px 0">没有符合条件的产品</td></tr>';
+    $('#pcfCount').textContent = '共 ' + rows.length + ' 条';
+  }
+
+  if ($('#pcfBody')) {
+    $('#pcfSearch').addEventListener('input', renderPcf);
+    $('#pcfStatus').addEventListener('change', renderPcf);
+    $('#pcfOwner').addEventListener('change', renderPcf);
+    $('#pcfReset').addEventListener('click', () => {
+      $('#pcfSearch').value = '';
+      $('#pcfStatus').value = 'all';
+      $('#pcfOwner').value = 'all';
+      renderPcf();
+      toast('筛选条件已重置（演示）');
+    });
+    $('#pcfBody').addEventListener('click', e => {
+      const el = e.target.closest('[data-pcf-detail]');
+      if (!el) return;
+      $('#modelProductName').textContent = el.dataset.pcfDetail;
+      switchView('model');
+      toast('已进入「' + el.dataset.pcfDetail + '」生命周期建模（演示）');
+    });
+  }
+
   /* ---------------- 初始化 ---------------- */
+  renderPcf();
   renderRange(1);
   renderMonthly();
   renderTrend();

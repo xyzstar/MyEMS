@@ -50,7 +50,9 @@ h1, h2, h3, h4, p { margin: 0; }
   stroke-linecap: round; stroke-linejoin: round;
 }
 .ico-18 { width: 18px; height: 18px; }
+.ico-14 { width: 14px; height: 14px; }
 .ico-12 { width: 12px; height: 12px; }
+.ico-10 { width: 10px; height: 10px; }
 
 /* ---------- 布局 ---------- */
 .app { display: flex; min-height: 100vh; min-width: 1080px; }
@@ -476,6 +478,71 @@ h1, h2, h3, h4, p { margin: 0; }
 .pill-draft { background: #FFF6E8; color: #B27A18; }
 .pill-blue { background: var(--blue-light); color: var(--blue); }
 .pill-green { background: var(--green-soft); color: #1C9576; }
+
+/* ---------- 产品清单 ---------- */
+.title-with-badge { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.cert-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10.5px; font-weight: 500; padding: 1px 7px; border-radius: 9px;
+  color: #2F6BD8; background: #EAF2FF; border: 1px solid #DCE9FF;
+}
+.cert-badge .ico { width: 10px; height: 10px; }
+.cert-badge.sgs { color: #D8613F; background: #FFF3EE; border-color: #FADFD4; letter-spacing: .5px; }
+
+.filter-bar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 12px 14px; border-bottom: 1px solid var(--line-soft);
+}
+.f-input {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 30px; padding: 0 10px; width: 220px;
+  border: 1px solid #DDE5F0; border-radius: 5px; background: #fff;
+}
+.f-input .ico { color: #9AA7B8; flex: none; }
+.f-input input {
+  border: 0; outline: 0; background: transparent; width: 100%;
+  font-size: 12px; color: var(--text); font-family: inherit;
+}
+.f-input input::placeholder { color: #A9B4C4; }
+.f-select {
+  height: 30px; padding: 0 8px; border-radius: 5px;
+  border: 1px solid #DDE5F0; background: #fff;
+  font-size: 12px; color: #5A6779; font-family: inherit; cursor: pointer; outline: 0;
+}
+.f-select-sm { height: 26px; font-size: 11.5px; color: #7A889C; }
+.f-date { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #7A889C; }
+.f-date input {
+  height: 30px; padding: 0 8px; border-radius: 5px; font-family: inherit;
+  border: 1px solid #DDE5F0; background: #fff; font-size: 11.5px; color: #5A6779;
+}
+.f-date em { font-style: normal; color: #B6C0CE; }
+
+.pcf-table th, .pcf-table td { padding: 11px 12px; }
+.pcf-table .prod-name {
+  font-weight: 500; color: #1D2937; cursor: pointer;
+}
+.pcf-table .prod-name:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.pcf-table td.cf { font-family: var(--num-font); font-size: 13px; color: #1D2937; }
+.pcf-table td.owner { color: #5D6B80; }
+.pcf-table .op-link { color: var(--blue); cursor: pointer; }
+.pcf-table .op-link:hover { text-decoration: underline; }
+.lock-tag { font-size: 12px; color: #7A889C; }
+.lock-tag.on { color: #B27A18; }
+.status.chart i { background: #2F6BD8; }
+.status.doing i { background: #E9A23B; }
+.status.todo2 i { background: #A9B8CC; }
+.pager {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  padding: 10px 14px; font-size: 12px; color: #7A889C;
+}
+.pager-total { margin-right: auto; }
+.pager-btn {
+  min-width: 26px; height: 26px; padding: 0 6px; border-radius: 4px;
+  border: 1px solid #E2E9F3; background: #fff; color: #66748A;
+  font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+}
+.pager-btn:hover { border-color: #B9D0F0; color: var(--blue); }
+.pager-btn.on { background: var(--blue-light); border-color: #B8CFF4; color: var(--blue); font-weight: 500; }
 
 /* ---------- 按钮 / 控件 ---------- */
 .btn {
