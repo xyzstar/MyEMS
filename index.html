@@ -737,9 +737,9 @@
           <div class="card">
             <div class="card-head row">
               <span class="card-title">生命周期清单</span>
-              <span class="card-sub">共 9 项清单 · 按阶段归集</span>
+              <span class="card-sub" id="invCount">共 9 项清单 · 按阶段归集</span>
               <div class="head-right">
-                <button class="btn btn-sm" data-toast="新增清单项（原型演示）">
+                <button class="btn btn-sm" id="invAddBtn">
                   <svg class="ico ico-12"><use href="#i-plus"/></svg>新增清单
                 </button>
               </div>
@@ -749,7 +749,7 @@
                 <thead>
                   <tr><th>阶段</th><th>清单项</th><th>活动数据</th><th>排放因子</th><th class="ta-r">排放量 (kgCO₂e)</th><th>数据来源</th></tr>
                 </thead>
-                <tbody>
+                <tbody id="invBody">
                   <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">铝合金外壳</td><td>0.86 kg</td><td>8.24 kgCO₂e/kg</td><td class="ta-r num-cell">7.09</td><td>供应商 EPD</td></tr>
                   <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">功率半导体</td><td>0.12 kg</td><td>86.50 kgCO₂e/kg</td><td class="ta-r num-cell">10.38</td><td>Ecoinvent</td></tr>
                   <tr><td><span class="badge s2">原材料获取</span></td><td class="strong">铜线缆</td><td>0.64 kg</td><td>4.18 kgCO₂e/kg</td><td class="ta-r num-cell">2.68</td><td>Ecoinvent</td></tr>
@@ -761,7 +761,7 @@
                   <tr><td><span class="badge s3">回收处置</span></td><td class="strong">拆解与运输</td><td>1 台</td><td>1.30 kgCO₂e/台</td><td class="ta-r num-cell">1.30</td><td>回收商</td></tr>
                 </tbody>
                 <tfoot>
-                  <tr><td colspan="4">合计</td><td class="ta-r">42.59</td><td></td></tr>
+                  <tr><td colspan="4">合计</td><td class="ta-r" id="invTotal">42.59</td><td></td></tr>
                 </tfoot>
               </table>
             </div>
@@ -1245,6 +1245,57 @@
     <div class="modal-foot">
       <button class="btn" data-modal-close>取消</button>
       <button class="btn btn-primary" id="nmSubmit">创建并开始建模</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="invModal" aria-hidden="true">
+  <div class="modal-mask" data-modal-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="invTitle">
+    <div class="modal-head">
+      <h3 id="invTitle">新增清单项</h3>
+      <button class="modal-x" data-modal-close aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <label class="form-item">
+          <span>生命周期阶段<i>*</i></span>
+          <select id="ivStage" class="f-select">
+            <option>原材料获取</option>
+            <option>生产制造</option>
+            <option>运输分销</option>
+            <option>使用阶段</option>
+            <option>回收处置</option>
+          </select>
+        </label>
+        <label class="form-item">
+          <span>清单项名称<i>*</i></span>
+          <input id="ivItem" type="text" placeholder="如：铝合金外壳">
+        </label>
+        <label class="form-item">
+          <span>活动数据</span>
+          <input id="ivActivity" type="text" placeholder="如：0.86 kg">
+        </label>
+        <label class="form-item">
+          <span>排放因子</span>
+          <input id="ivFactor" type="text" placeholder="如：8.24 kgCO₂e/kg">
+        </label>
+        <label class="form-item">
+          <span>排放量 (kgCO₂e)<i>*</i></span>
+          <input id="ivAmount" type="number" step="0.01" min="0" placeholder="如：7.09">
+        </label>
+        <label class="form-item">
+          <span>数据来源</span>
+          <input id="ivSource" type="text" placeholder="如：供应商 EPD">
+        </label>
+      </div>
+      <p class="form-tip">新增后计入生命周期清单与合计排放量，阶段占比按现有阶段值归集展示。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-modal-close>取消</button>
+      <button class="btn btn-primary" id="ivSubmit">
+        <svg class="ico ico-12"><use href="#i-check"/></svg>确认新增
+      </button>
     </div>
   </div>
 </div>

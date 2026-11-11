@@ -602,6 +602,54 @@
     });
   }
 
+  /* ---------------- 新增清单项 ---------------- */
+  const invModal = $('#invModal');
+  const invBody = $('#invBody');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const STAGE_BADGE = { '原材料获取': 's2', '生产制造': 's1', '运输分销': 's3', '使用阶段': 's3', '回收处置': 's3' };
+  if ($('#invAddBtn') && invModal) {
+    $('#invAddBtn').addEventListener('click', () => {
+      invModal.classList.add('show');
+      invModal.setAttribute('aria-hidden', 'false');
+      $('#ivItem').focus();
+    });
+  }
+  if ($('#ivSubmit') && invBody && invModal) {
+    $('#ivSubmit').addEventListener('click', () => {
+      const stage = $('#ivStage').value;
+      const item = $('#ivItem').value.trim();
+      const amountRaw = $('#ivAmount').value;
+      const amount = parseFloat(amountRaw);
+      if (!item) { toast('请填写清单项名称'); $('#ivItem').focus(); return; }
+      if (!amountRaw || isNaN(amount) || amount < 0) { toast('请填写有效的排放量'); $('#ivAmount').focus(); return; }
+
+      const tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><span class="badge ' + (STAGE_BADGE[stage] || 's3') + '">' + esc(stage) + '</span></td>' +
+        '<td class="strong">' + esc(item) + '</td>' +
+        '<td>' + esc($('#ivActivity').value.trim() || '—') + '</td>' +
+        '<td>' + esc($('#ivFactor').value.trim() || '—') + '</td>' +
+        '<td class="ta-r num-cell">' + amount.toFixed(2) + '</td>' +
+        '<td>' + esc($('#ivSource').value.trim() || '手工录入') + '</td>';
+      invBody.appendChild(tr);
+
+      const rows = Array.from(invBody.querySelectorAll('tr'));
+      const total = rows.reduce((sum, row) => {
+        const cell = row.querySelector('.num-cell');
+        return sum + (cell ? parseFloat(cell.textContent) || 0 : 0);
+      }, 0);
+      $('#invTotal').textContent = total.toFixed(2);
+      $('#invCount').textContent = '共 ' + rows.length + ' 项清单 · 按阶段归集';
+
+      ['#ivItem', '#ivActivity', '#ivFactor', '#ivAmount', '#ivSource'].forEach(sel => {
+        const el = $(sel); if (el) el.value = '';
+      });
+      invModal.classList.remove('show');
+      invModal.setAttribute('aria-hidden', 'true');
+      toast('已新增清单项「' + item + '」，合计排放量更新为 ' + total.toFixed(2));
+    });
+  }
+
   /* ---------------- 碳足迹报告 ---------------- */
   const previewModal = $('#reportPreviewModal');
   const previewBody = $('#reportPreviewBody');
