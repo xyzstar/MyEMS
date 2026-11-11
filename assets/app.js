@@ -645,23 +645,27 @@
     });
   }
 
-  /* ---------------- 碳足迹报告 ---------------- */
+  /* ---------------- 报告预览 / 打印 ---------------- */
   const previewModal = $('#reportPreviewModal');
   const previewBody = $('#reportPreviewBody');
-  if ($('#reportPreviewBtn') && previewModal && previewBody) {
-    $('#reportPreviewBtn').addEventListener('click', () => {
-      const paper = $('#view-pcf-report .paper');
-      if (!paper) return;
-      previewBody.innerHTML = '';
-      previewBody.appendChild(paper.cloneNode(true));
-      previewBody.scrollTop = 0;
-      previewModal.classList.add('show');
-      previewModal.setAttribute('aria-hidden', 'false');
-    });
+  function openReportPreview() {
+    if (!previewModal || !previewBody) return;
+    const paper = $('.view.active .paper');
+    if (!paper) return;
+    previewBody.innerHTML = '';
+    previewBody.appendChild(paper.cloneNode(true));
+    previewBody.scrollTop = 0;
+    previewModal.classList.add('show');
+    previewModal.setAttribute('aria-hidden', 'false');
   }
-  if ($('#reportPrintBtn')) {
-    $('#reportPrintBtn').addEventListener('click', () => window.print());
-  }
+  ['#reportPreviewBtn', '#orgReportPreviewBtn'].forEach(sel => {
+    const btn = $(sel);
+    if (btn) btn.addEventListener('click', openReportPreview);
+  });
+  ['#reportPrintBtn', '#orgReportPrintBtn'].forEach(sel => {
+    const btn = $(sel);
+    if (btn) btn.addEventListener('click', () => window.print());
+  });
   if ($('#previewPrintBtn') && previewModal) {
     $('#previewPrintBtn').addEventListener('click', () => {
       previewModal.classList.remove('show');
@@ -669,9 +673,9 @@
       setTimeout(() => window.print(), 120);
     });
   }
-  ['#reportDownloadBtn', '#previewDownloadBtn'].forEach(sel => {
+  ['#reportDownloadBtn', '#previewDownloadBtn', '#orgReportExportBtn'].forEach(sel => {
     const btn = $(sel);
-    if (btn) btn.addEventListener('click', () => toast('PDF 报告已开始下载（原型演示）'));
+    if (btn) btn.addEventListener('click', () => toast('报告已开始下载（原型演示）'));
   });
 
   /* ---------------- 初始化 ---------------- */

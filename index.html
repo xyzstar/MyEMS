@@ -443,12 +443,14 @@
             <p>依据核算边界与排放结果自动生成报告，支持在线预览与导出；报告结构与版式可按企业要求定制。</p>
           </div>
           <div class="page-actions">
-            <button class="btn" data-toast="报告已进入预览模式（原型演示）">
+            <button class="btn" id="orgReportPreviewBtn">
               <svg class="ico ico-12"><use href="#i-doc"/></svg>预览
             </button>
-            <button class="btn" data-toast="Word 报告生成中（原型演示）">导出 Word</button>
-            <button class="btn btn-primary" data-toast="PDF 报告已生成（原型演示）">
-              <svg class="ico ico-12"><use href="#i-download"/></svg>导出 PDF
+            <button class="btn" id="orgReportExportBtn">
+              <svg class="ico ico-12"><use href="#i-download"/></svg>导出
+            </button>
+            <button class="btn btn-primary" id="orgReportPrintBtn">
+              <svg class="ico ico-12"><use href="#i-print"/></svg>打印
             </button>
           </div>
         </div>
