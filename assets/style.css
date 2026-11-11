@@ -834,6 +834,13 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .form-tip { font-size: 11.5px; color: #98A4B5; line-height: 1.6; margin: 12px 0 14px; }
 .modal-foot { display: flex; justify-content: flex-end; gap: 8px; padding: 0 18px 16px; }
+.modal-box.wide { width: 920px; }
+.modal-head-tip { margin-left: 10px; font-size: 11.5px; color: #98A4B5; }
+.preview-body {
+  max-height: 66vh; overflow: auto; background: #F4F6FA;
+  padding: 14px; border-bottom: 1px solid var(--line-soft);
+}
+.preview-body .paper { min-height: auto; box-shadow: 0 4px 18px rgba(20, 45, 90, .08); }
 
 /* ---------- Toast ---------- */
 .toast {
@@ -893,4 +900,5 @@ h1, h2, h3, h4, p { margin: 0; }
   .report-layout { display: block; }
   .view { display: none !important; }
   .view.active { display: block !important; }
+  .modal { display: none !important; }
 }
